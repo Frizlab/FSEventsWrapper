@@ -1,19 +1,23 @@
-//
-//  FSEventsWrapper.h
-//  FSEventsWrapper
-//
-//  Created by François Lamboley on 06/07/2018.
-//  Copyright © 2018 Frizlab. All rights reserved.
-//
+/*
+ * FSEventsWrapper.h
+ * FSEventsWrapper
+ *
+ * Created by François Lamboley on 06/07/2018.
+ * Copyright © 2018 Frizlab. All rights reserved.
+ */
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
-//! Project version number for FSEventsWrapper.
+/** Project version number for FSEventsWrapper. */
 FOUNDATION_EXPORT double FSEventsWrapperVersionNumber;
 
-//! Project version string for FSEventsWrapper.
+/** Project version string for FSEventsWrapper. */
 FOUNDATION_EXPORT const unsigned char FSEventsWrapperVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <FSEventsWrapper/PublicHeader.h>
 
+#import <FSEventsWrapper/FSEventStreamCallbackHandler.h>
 
+/* For compilation reasons, this must be imported here. But do NOT use the
+ * CCreateFSEventStream method! (There might be a way to circumvent this; I did
+ * not try…) */
+#import <FSEventsWrapper/FSEventsWrapperPrivate.h>

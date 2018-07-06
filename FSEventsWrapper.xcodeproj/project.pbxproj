@@ -9,7 +9,13 @@
 /* Begin PBXBuildFile section */
 		7B8C3EC420EF736B0001D2B3 /* FSEventsWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B8C3EBA20EF736B0001D2B3 /* FSEventsWrapper.framework */; };
 		7B8C3EC920EF736B0001D2B3 /* FSEventsWrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EC820EF736B0001D2B3 /* FSEventsWrapperTests.swift */; };
-		7B8C3ECB20EF736B0001D2B3 /* FSEventsWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EBD20EF736B0001D2B3 /* FSEventsWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B8C3EE320EF76660001D2B3 /* FSEventsWrapperPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE120EF76660001D2B3 /* FSEventsWrapperPrivate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7B8C3EE520EF767E0001D2B3 /* FSEventsWrapperPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EE420EF767E0001D2B3 /* FSEventsWrapperPrivate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B8C3EE720EF768F0001D2B3 /* FSEventsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE620EF768F0001D2B3 /* FSEventsWrapper.swift */; };
+		7B8C3EEA20EF76950001D2B3 /* CFSEventUserInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EE820EF76950001D2B3 /* CFSEventUserInfo.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7B8C3EEB20EF76950001D2B3 /* CFSEventUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE920EF76950001D2B3 /* CFSEventUserInfo.m */; };
+		7B8C3EED20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EEC20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B8C3EEF20EF77310001D2B3 /* FSEventsWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EEE20EF77310001D2B3 /* FSEventsWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,11 +30,17 @@
 
 /* Begin PBXFileReference section */
 		7B8C3EBA20EF736B0001D2B3 /* FSEventsWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FSEventsWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B8C3EBD20EF736B0001D2B3 /* FSEventsWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSEventsWrapper.h; sourceTree = "<group>"; };
 		7B8C3EBE20EF736B0001D2B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B8C3EC320EF736B0001D2B3 /* FSEventsWrapperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FSEventsWrapperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B8C3EC820EF736B0001D2B3 /* FSEventsWrapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSEventsWrapperTests.swift; sourceTree = "<group>"; };
 		7B8C3ECA20EF736B0001D2B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B8C3EE120EF76660001D2B3 /* FSEventsWrapperPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSEventsWrapperPrivate.m; sourceTree = "<group>"; };
+		7B8C3EE420EF767E0001D2B3 /* FSEventsWrapperPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEventsWrapperPrivate.h; sourceTree = "<group>"; };
+		7B8C3EE620EF768F0001D2B3 /* FSEventsWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSEventsWrapper.swift; sourceTree = "<group>"; };
+		7B8C3EE820EF76950001D2B3 /* CFSEventUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFSEventUserInfo.h; sourceTree = "<group>"; };
+		7B8C3EE920EF76950001D2B3 /* CFSEventUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFSEventUserInfo.m; sourceTree = "<group>"; };
+		7B8C3EEC20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEventStreamCallbackHandler.h; sourceTree = "<group>"; };
+		7B8C3EEE20EF77310001D2B3 /* FSEventsWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEventsWrapper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +83,13 @@
 		7B8C3EBC20EF736B0001D2B3 /* FSEventsWrapper */ = {
 			isa = PBXGroup;
 			children = (
-				7B8C3EBD20EF736B0001D2B3 /* FSEventsWrapper.h */,
+				7B8C3EEE20EF77310001D2B3 /* FSEventsWrapper.h */,
+				7B8C3EE620EF768F0001D2B3 /* FSEventsWrapper.swift */,
+				7B8C3EE420EF767E0001D2B3 /* FSEventsWrapperPrivate.h */,
+				7B8C3EE120EF76660001D2B3 /* FSEventsWrapperPrivate.m */,
+				7B8C3EE820EF76950001D2B3 /* CFSEventUserInfo.h */,
+				7B8C3EE920EF76950001D2B3 /* CFSEventUserInfo.m */,
+				7B8C3EEC20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h */,
 				7B8C3EBE20EF736B0001D2B3 /* Info.plist */,
 			);
 			path = FSEventsWrapper;
@@ -93,7 +111,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B8C3ECB20EF736B0001D2B3 /* FSEventsWrapper.h in Headers */,
+				7B8C3EE520EF767E0001D2B3 /* FSEventsWrapperPrivate.h in Headers */,
+				7B8C3EEA20EF76950001D2B3 /* CFSEventUserInfo.h in Headers */,
+				7B8C3EEF20EF77310001D2B3 /* FSEventsWrapper.h in Headers */,
+				7B8C3EED20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +169,7 @@
 				TargetAttributes = {
 					7B8C3EB920EF736B0001D2B3 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 					7B8C3EC220EF736B0001D2B3 = {
 						CreatedOnToolsVersion = 10.0;
@@ -194,6 +216,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B8C3EE320EF76660001D2B3 /* FSEventsWrapperPrivate.m in Sources */,
+				7B8C3EEB20EF76950001D2B3 /* CFSEventUserInfo.m in Sources */,
+				7B8C3EE720EF768F0001D2B3 /* FSEventsWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +363,7 @@
 		7B8C3ECF20EF736B0001D2B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -356,6 +382,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.frizlab.FSEventsWrapper;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -363,6 +390,7 @@
 		7B8C3ED020EF736B0001D2B3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -388,6 +416,7 @@
 		7B8C3ED220EF736B0001D2B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = FSEventsWrapperTests/Info.plist;
@@ -405,6 +434,7 @@
 		7B8C3ED320EF736B0001D2B3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = FSEventsWrapperTests/Info.plist;
