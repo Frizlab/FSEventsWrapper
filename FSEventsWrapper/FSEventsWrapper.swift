@@ -10,25 +10,25 @@ import Foundation
 
 
 
-class FSEventsWrapper {
+public class FSEventsWrapper {
 	
-	let eventStream: FSEventStreamRef
+	public let eventStream: FSEventStreamRef
 	
-	let runLoop: CFRunLoop
-	let runLoopMode: RunLoop.Mode
+	public let runLoop: CFRunLoop
+	public let runLoopMode: RunLoop.Mode
 	
 	fileprivate var isStarted = false
 	fileprivate var isScheduled = false
 	
-	convenience init(path: String, callbackHandler: FSEventStreamCallbackHandler) {
+	public convenience init(path: String, callbackHandler: FSEventStreamCallbackHandler) {
 		self.init(paths: [path], since: nil, updateInterval: 0, fsEventStreamFlags: nil, callbackHandler: callbackHandler, runLoop: nil, runLoopMode: nil)
 	}
 	
-	convenience init(path: String, since startId: FSEventStreamEventId?, updateInterval: CFTimeInterval, callbackHandler: FSEventStreamCallbackHandler) {
+	public convenience init(path: String, since startId: FSEventStreamEventId?, updateInterval: CFTimeInterval, callbackHandler: FSEventStreamCallbackHandler) {
 		self.init(paths: [path], since: startId, updateInterval: updateInterval, fsEventStreamFlags: nil, callbackHandler: callbackHandler, runLoop: nil, runLoopMode: nil)
 	}
 	
-	convenience init(paths: [String], since startId: FSEventStreamEventId?, updateInterval: CFTimeInterval, callbackHandler: FSEventStreamCallbackHandler) {
+	public convenience init(paths: [String], since startId: FSEventStreamEventId?, updateInterval: CFTimeInterval, callbackHandler: FSEventStreamCallbackHandler) {
 		self.init(paths: paths, since: startId, updateInterval: updateInterval, fsEventStreamFlags: nil, callbackHandler: callbackHandler, runLoop: nil, runLoopMode: nil)
 	}
 	
@@ -67,7 +67,7 @@ class FSEventsWrapper {
 		The run loop mode on which the stream should be scheduled. If nil, the
 		default run loop mode will be used.
 	*/
-	init(
+	public init(
 		paths: [String],
 		since startId: FSEventStreamEventId?, updateInterval: CFTimeInterval, fsEventStreamFlags flags: FSEventStreamCreateFlags?,
 		callbackHandler: FSEventStreamCallbackHandler,
@@ -87,7 +87,7 @@ class FSEventsWrapper {
 		FSEventStreamUnscheduleFromRunLoop(eventStream, runLoop, runLoopMode as CFString)
 	}
 	
-	func startWatching() {
+	public func startWatching() {
 		if isStarted {return}
 		
 		if !isScheduled {FSEventStreamScheduleWithRunLoop(eventStream, runLoop, runLoopMode as CFString); isScheduled = true}
@@ -95,7 +95,7 @@ class FSEventsWrapper {
 		isStarted = true
 	}
 	
-	func stopWatching() {
+	public func stopWatching() {
 		if !isStarted {return}
 		
 		FSEventStreamStop(eventStream)
