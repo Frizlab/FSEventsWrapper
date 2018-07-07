@@ -12,6 +12,7 @@
 
 
 
+/* TODO: Get rid of the C callbacks and go pure Swift! */
 FSEventStreamRef CCreateFSEventStream(CFArrayRef paths, FSEventStreamEventId startId,
 												  CFTimeInterval updateInterval,
 												  FSEventStreamCreateFlags flags,

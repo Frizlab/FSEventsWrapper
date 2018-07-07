@@ -22,7 +22,9 @@ typedef NS_ENUM(NSUInteger, FSItemType) {
 	
 	FSItemTypeFile,
 	FSItemTypeDir,
-	FSItemTypeSymlink
+	FSItemTypeSymlink,
+	FSItemTypeHardlink,
+	FSItemTypeLastHardlink
 };
 
 /* NOT a Swift protocol because there can't be optional methods in a pure Swift
@@ -37,15 +39,16 @@ typedef NS_ENUM(NSUInteger, FSItemType) {
  *     The notion corresponds to the kFSEventStreamEventFlagOwnEvent flag. *** */
 
 /* kFSEventStreamEventFlagNone */
-- (void)fsChangedInFolder:(NSString *)folderPath becauseOfUs:(BOOL)isEventFromUs;
+- (void)fsChangedInFolder:(nonnull NSString *)folderPath eventId:(FSEventStreamEventId)eventId becauseOfUs:(BOOL)isEventFromUs;
 
 /* kFSEventStreamEventFlagMustScanSubDirs,
  * kFSEventStreamEventFlagUserDropped &
- * kFSEventStreamEventFlagKernelDropped */
-- (void)fsMustScanSubDirsAtPath:(NSString *)path reason:(FSMustScanSubDirsReason)reason fromUs:(BOOL)isEventFromUs;
+ * kFSEventStreamEventFlagKernelDropped
+ * Note sure if event id has a real meaning here... */
+- (void)fsMustScanSubDirsAtPath:(nonnull NSString *)path reason:(FSMustScanSubDirsReason)reason eventId:(FSEventStreamEventId)eventId fromUs:(BOOL)isEventFromUs;
 
 /* kFSEventStreamEventFlagEventIdsWrapped
- * You typically have nothing to do when this happens.
+ * TODO: Doc for when this happens (reset of disk UUID). https://stackoverflow.com/a/26281273/1152894
  * Note: There is no "becauseOfUs:" part in this method because I assume
  *       FSEvents will not set the OwnEvent flag for the EventIdsWrapped flag
  *       (it would not make much sense). However, I do not have any confirmation
@@ -60,16 +63,20 @@ typedef NS_ENUM(NSUInteger, FSItemType) {
 /* kFSEventStreamEventFlagRootChanged
  * Not called if kFSEventStreamCreateFlagWatchRoot is not set when creating the
  * stream.
+ * The event id is not sent with this method as it is always 0 (says the doc)
+ * for this event.
  * Note (TODO): I don't know if the "event is from us" flag is set for this event. */
 - (void)fsRootChanged:(BOOL)isEventFromUs;
 
 /* kFSEventStreamEventFlagMount
- * Note (TODO): I don't know if the "event is from us" flag is set for this event. */
-- (void)fsVolumeMountedAtPath:(NSString *)path becauseOfUs:(BOOL)isEventFromUs;
+ * Note (TODO): I don't know if the "event is from us" flag is set for this
+ * event, nor if the event id has any meaning here. */
+- (void)fsVolumeMountedAtPath:(nonnull NSString *)path eventId:(FSEventStreamEventId)eventId becauseOfUs:(BOOL)isEventFromUs;
 
 /* kFSEventStreamEventFlagUnmount
- * Note (TODO): I don't know if the "event is from us" flag is set for this event. */
-- (void)fsVolumeUnmountedAtPath:(NSString *)path becauseOfUs:(BOOL)isEventFromUs;
+ * Note (TODO): I don't know if the "event is from us" flag is set for this
+ * event, nor if the event id has any meaning here. */
+- (void)fsVolumeUnmountedAtPath:(nonnull NSString *)path eventId:(FSEventStreamEventId)eventId becauseOfUs:(BOOL)isEventFromUs;
 
 /* *** All methods below are called only if kFSEventStreamCreateFlagFileEvents
  *     was set when the stream was created... says the doc. But actually, it is
@@ -78,32 +85,36 @@ typedef NS_ENUM(NSUInteger, FSItemType) {
  *     set... The only difference is the events are sent for the parent folder
  *     only, and not for each file when the flag is not set. *** */
 /* itemType refers to the kFSEventStreamEventFlagItemIsFile,
- * kFSEventStreamEventFlagItemIsDir and kFSEventStreamEventFlagItemIsSymlink
- * flags. */
+ * kFSEventStreamEventFlagItemIsDir, kFSEventStreamEventFlagItemIsSymlink,
+ * kFSEventStreamEventFlagItemIsHardlink and
+ * kFSEventStreamEventFlagItemIsLastHardlink flags. */
 
 /* kFSEventStreamEventFlagItemCreated */
-- (void)fsItemCreatedAtPath:(NSString *)path itemType:(FSItemType)itemType becauseOfUs:(BOOL)isEventFromUs;
+- (void)fsItemCreatedAtPath:(nonnull NSString *)path itemType:(FSItemType)itemType eventId:(FSEventStreamEventId)eventId becauseOfUs:(BOOL)isEventFromUs;
 
 /* kFSEventStreamEventFlagItemRemoved */
-- (void)fsItemRemovedAtPath:(NSString *)path itemType:(FSItemType)itemType becauseOfUs:(BOOL)isEventFromUs;
+- (void)fsItemRemovedAtPath:(nonnull NSString *)path itemType:(FSItemType)itemType eventId:(FSEventStreamEventId)eventId becauseOfUs:(BOOL)isEventFromUs;
 
 /* kFSEventStreamEventFlagItemInodeMetaMod */
-- (void)fsItemInodeMetadataModifiedAtPath:(NSString *)path itemType:(FSItemType)itemType becauseOfUs:(BOOL)isEventFromUs;
+- (void)fsItemInodeMetadataModifiedAtPath:(nonnull NSString *)path itemType:(FSItemType)itemType eventId:(FSEventStreamEventId)eventId becauseOfUs:(BOOL)isEventFromUs;
 
 /* kFSEventStreamEventFlagItemRenamed
  * TODO: Verify the path given is the new path of the item. */
-- (void)fsItemRenamedToPath:(NSString *)path itemType:(FSItemType)itemType becauseOfUs:(BOOL)isEventFromUs;
+- (void)fsItemRenamedToPath:(nonnull NSString *)path itemType:(FSItemType)itemType eventId:(FSEventStreamEventId)eventId becauseOfUs:(BOOL)isEventFromUs;
 
 /* kFSEventStreamEventFlagItemModified */
-- (void)fsItemDataModifiedAtPath:(NSString *)path itemType:(FSItemType)itemType becauseOfUs:(BOOL)isEventFromUs;
+- (void)fsItemDataModifiedAtPath:(nonnull NSString *)path itemType:(FSItemType)itemType eventId:(FSEventStreamEventId)eventId becauseOfUs:(BOOL)isEventFromUs;
 
 /* kFSEventStreamEventFlagItemFinderInfoMod */
-- (void)fsItemFinderInfoModifiedAtPath:(NSString *)path itemType:(FSItemType)itemType becauseOfUs:(BOOL)isEventFromUs;
+- (void)fsItemFinderInfoModifiedAtPath:(nonnull NSString *)path itemType:(FSItemType)itemType eventId:(FSEventStreamEventId)eventId becauseOfUs:(BOOL)isEventFromUs;
 
 /* kFSEventStreamEventFlagItemChangeOwner */
-- (void)fsItemOwnershipModifiedAtPath:(NSString *)path itemType:(FSItemType)itemType becauseOfUs:(BOOL)isEventFromUs;
+- (void)fsItemOwnershipModifiedAtPath:(nonnull NSString *)path itemType:(FSItemType)itemType eventId:(FSEventStreamEventId)eventId becauseOfUs:(BOOL)isEventFromUs;
 
 /* kFSEventStreamEventFlagItemXattrMod */
-- (void)fsItemXattrModifiedAtPath:(NSString *)path itemType:(FSItemType)itemType becauseOfUs:(BOOL)isEventFromUs;
+- (void)fsItemXattrModifiedAtPath:(nonnull NSString *)path itemType:(FSItemType)itemType eventId:(FSEventStreamEventId)eventId becauseOfUs:(BOOL)isEventFromUs;
+
+/* kFSEventStreamEventFlagItemCloned */
+- (void)fsItemClonedAtPath:(nonnull NSString *)path itemType:(FSItemType)itemType eventId:(FSEventStreamEventId)eventId becauseOfUs:(BOOL)isEventFromUs __OSX_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
 
 @end

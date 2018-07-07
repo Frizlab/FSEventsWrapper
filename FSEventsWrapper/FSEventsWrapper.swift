@@ -17,19 +17,16 @@ public class FSEventsWrapper {
 	public let runLoop: CFRunLoop
 	public let runLoopMode: RunLoop.Mode
 	
-	fileprivate var isStarted = false
-	fileprivate var isScheduled = false
+	private var isScheduled = false
+	private(set) var isStarted = false
 	
-	public convenience init(path: String, callbackHandler: FSEventStreamCallbackHandler) {
-		self.init(paths: [path], since: nil, updateInterval: 0, fsEventStreamFlags: nil, callbackHandler: callbackHandler, runLoop: nil, runLoopMode: nil)
-	}
-	
-	public convenience init(path: String, since startId: FSEventStreamEventId?, updateInterval: CFTimeInterval, callbackHandler: FSEventStreamCallbackHandler) {
-		self.init(paths: [path], since: startId, updateInterval: updateInterval, fsEventStreamFlags: nil, callbackHandler: callbackHandler, runLoop: nil, runLoopMode: nil)
-	}
-	
-	public convenience init(paths: [String], since startId: FSEventStreamEventId?, updateInterval: CFTimeInterval, callbackHandler: FSEventStreamCallbackHandler) {
-		self.init(paths: paths, since: startId, updateInterval: updateInterval, fsEventStreamFlags: nil, callbackHandler: callbackHandler, runLoop: nil, runLoopMode: nil)
+	public convenience init(
+		path: String,
+		since startId: FSEventStreamEventId? = nil, updateInterval: CFTimeInterval = 0, fsEventStreamFlags flags: FSEventStreamCreateFlags = FSEventStreamCreateFlags(kFSEventStreamCreateFlagNone),
+		callbackHandler: FSEventStreamCallbackHandler,
+		runLoop rl: RunLoop = .current, runLoopMode rlm: RunLoop.Mode = .default
+	) {
+		self.init(paths: [path], since: startId, updateInterval: updateInterval, fsEventStreamFlags: flags, callbackHandler: callbackHandler, runLoop: rl, runLoopMode: rlm)
 	}
 	
 	/**
@@ -69,16 +66,16 @@ public class FSEventsWrapper {
 	*/
 	public init(
 		paths: [String],
-		since startId: FSEventStreamEventId?, updateInterval: CFTimeInterval, fsEventStreamFlags flags: FSEventStreamCreateFlags?,
+		since startId: FSEventStreamEventId? = nil, updateInterval: CFTimeInterval = 0, fsEventStreamFlags flags: FSEventStreamCreateFlags = FSEventStreamCreateFlags(kFSEventStreamCreateFlagNone),
 		callbackHandler: FSEventStreamCallbackHandler,
-		runLoop rl: CFRunLoop?, runLoopMode rlm: RunLoop.Mode?
+		runLoop rl: RunLoop = .current, runLoopMode rlm: RunLoop.Mode = .default
 	) {
 		let cfpaths: CFArray = paths as CFArray
 		let actualStartId = startId ?? FSEventStreamEventId(kFSEventStreamEventIdSinceNow)
-		let actualFlags = FSEventStreamCreateFlags(kFSEventStreamCreateFlagUseCFTypes | (flags != nil ? Int(flags!) : 0))
+		let actualFlags = FSEventStreamCreateFlags(kFSEventStreamCreateFlagUseCFTypes | Int(flags))
 		
-		runLoopMode = rlm ?? .default
-		runLoop = rl ?? RunLoop.current.getCFRunLoop()
+		runLoopMode = rlm
+		runLoop = rl.getCFRunLoop()
 		eventStream = CCreateFSEventStream(cfpaths, actualStartId, updateInterval, actualFlags, callbackHandler)
 	}
 	
@@ -107,7 +104,9 @@ public class FSEventsWrapper {
 	The original function that was created to create the FSEventStream. However,
 	due to multiple "unsafe" usage and workaround needed to make things work in
 	Swift, the stream creation has finally been moved to an Objective-C file.
-	*/
+	
+	- note: With modern Swift and my gained knowledge, we can probably go full
+	Swift and have the callbacks called directly in Swift. */
 	func createStreamToWatchFolders(
 		paths: [String],
 		since startId: FSEventStreamEventId?,
