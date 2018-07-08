@@ -49,7 +49,8 @@ static void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCal
 		currentEventFlags = (currentEventFlags & ~kFSEventStreamEventFlagOwnEvent);
 		
 		if (currentEventFlags == kFSEventStreamEventFlagNone) {
-			[userInfoObj.callbackHandler fsChangedInFolder:currentEventPath eventId:currentEventId becauseOfUs:fromUs];
+			if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsChangedInFolder:eventId:becauseOfUs:)])
+				[userInfoObj.callbackHandler fsChangedInFolder:currentEventPath eventId:currentEventId becauseOfUs:fromUs];
 		} else {
 			FSItemType itemType = FSItemTypeUnknown;
 			FSEventStreamEventFlags itemTypeFlags = (currentEventFlags & (kFSEventStreamEventFlagItemIsFile|kFSEventStreamEventFlagItemIsDir|kFSEventStreamEventFlagItemIsSymlink|kFSEventStreamEventFlagItemIsHardlink|kFSEventStreamEventFlagItemIsLastHardlink));
@@ -63,73 +64,90 @@ static void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCal
 			
 			BOOL calledCallbackAtLeastOnce = NO;
 			if ((currentEventFlags & kFSEventStreamEventFlagMustScanSubDirs) != 0) {
-				FSMustScanSubDirsReason reason = FSMustScanSubDirsReasonUnknown;
-				BOOL userDropped = (currentEventFlags & kFSEventStreamEventFlagUserDropped);
-				BOOL kernelDropped = (currentEventFlags & kFSEventStreamEventFlagKernelDropped);
-				if      ( userDropped && !kernelDropped) {reason = FSMustScanSubDirsReasonUserDropped;}
-				else if (!userDropped &&  kernelDropped) {reason = FSMustScanSubDirsReasonKernelDropped;}
-				[userInfoObj.callbackHandler fsMustScanSubDirsAtPath:currentEventPath reason:reason eventId:currentEventId fromUs:fromUs];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsMustScanSubDirsAtPath:reason:eventId:fromUs:)]) {
+					FSMustScanSubDirsReason reason = FSMustScanSubDirsReasonUnknown;
+					BOOL userDropped = (currentEventFlags & kFSEventStreamEventFlagUserDropped);
+					BOOL kernelDropped = (currentEventFlags & kFSEventStreamEventFlagKernelDropped);
+					if      ( userDropped && !kernelDropped) {reason = FSMustScanSubDirsReasonUserDropped;}
+					else if (!userDropped &&  kernelDropped) {reason = FSMustScanSubDirsReasonKernelDropped;}
+					[userInfoObj.callbackHandler fsMustScanSubDirsAtPath:currentEventPath reason:reason eventId:currentEventId fromUs:fromUs];
+				}
 				calledCallbackAtLeastOnce = YES;
 			}
 			if ((currentEventFlags & kFSEventStreamEventFlagEventIdsWrapped) != 0) {
-				[userInfoObj.callbackHandler fsStreamEventIdsWrapped];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsStreamEventIdsWrapped)])
+					[userInfoObj.callbackHandler fsStreamEventIdsWrapped];
 				calledCallbackAtLeastOnce = YES;
 			}
 			if ((currentEventFlags & kFSEventStreamEventFlagHistoryDone) != 0) {
-				[userInfoObj.callbackHandler fsStreamHistoryDone];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsStreamHistoryDone)])
+					[userInfoObj.callbackHandler fsStreamHistoryDone];
 				calledCallbackAtLeastOnce = YES;
 			}
 			if ((currentEventFlags & kFSEventStreamEventFlagRootChanged) != 0) {
-				[userInfoObj.callbackHandler fsRootChanged:fromUs];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsRootChanged:)])
+					[userInfoObj.callbackHandler fsRootChanged:fromUs];
 				calledCallbackAtLeastOnce = YES;
 			}
 			if ((currentEventFlags & kFSEventStreamEventFlagMount) != 0) {
-				[userInfoObj.callbackHandler fsVolumeMountedAtPath:currentEventPath eventId:currentEventId becauseOfUs:fromUs];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsVolumeMountedAtPath:eventId:becauseOfUs:)])
+					[userInfoObj.callbackHandler fsVolumeMountedAtPath:currentEventPath eventId:currentEventId becauseOfUs:fromUs];
 				calledCallbackAtLeastOnce = YES;
 			}
 			if ((currentEventFlags & kFSEventStreamEventFlagUnmount) != 0) {
-				[userInfoObj.callbackHandler fsVolumeUnmountedAtPath:currentEventPath eventId:currentEventId becauseOfUs:fromUs];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsVolumeUnmountedAtPath:eventId:becauseOfUs:)])
+					[userInfoObj.callbackHandler fsVolumeUnmountedAtPath:currentEventPath eventId:currentEventId becauseOfUs:fromUs];
 				calledCallbackAtLeastOnce = YES;
 			}
 			if ((currentEventFlags & kFSEventStreamEventFlagItemCreated) != 0) {
-				[userInfoObj.callbackHandler fsItemCreatedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsItemCreatedAtPath:itemType:eventId:becauseOfUs:)])
+					[userInfoObj.callbackHandler fsItemCreatedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
 				calledCallbackAtLeastOnce = YES;
 			}
 			if ((currentEventFlags & kFSEventStreamEventFlagItemRemoved) != 0) {
-				[userInfoObj.callbackHandler fsItemRemovedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsItemRemovedAtPath:itemType:eventId:becauseOfUs:)])
+					[userInfoObj.callbackHandler fsItemRemovedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
 				calledCallbackAtLeastOnce = YES;
 			}
 			if ((currentEventFlags & kFSEventStreamEventFlagItemInodeMetaMod) != 0) {
-				[userInfoObj.callbackHandler fsItemInodeMetadataModifiedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsItemInodeMetadataModifiedAtPath:itemType:eventId:becauseOfUs:)])
+					[userInfoObj.callbackHandler fsItemInodeMetadataModifiedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
 				calledCallbackAtLeastOnce = YES;
 			}
 			if ((currentEventFlags & kFSEventStreamEventFlagItemRenamed) != 0) {
-				[userInfoObj.callbackHandler fsItemRenamedToPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsItemRenamedToPath:itemType:eventId:becauseOfUs:)])
+					[userInfoObj.callbackHandler fsItemRenamedToPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
 				calledCallbackAtLeastOnce = YES;
 			}
 			if ((currentEventFlags & kFSEventStreamEventFlagItemModified) != 0) {
-				[userInfoObj.callbackHandler fsItemDataModifiedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsItemDataModifiedAtPath:itemType:eventId:becauseOfUs:)])
+					[userInfoObj.callbackHandler fsItemDataModifiedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
 				calledCallbackAtLeastOnce = YES;
 			}
 			if ((currentEventFlags & kFSEventStreamEventFlagItemFinderInfoMod) != 0) {
-				[userInfoObj.callbackHandler fsItemFinderInfoModifiedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsItemFinderInfoModifiedAtPath:itemType:eventId:becauseOfUs:)])
+					[userInfoObj.callbackHandler fsItemFinderInfoModifiedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
 				calledCallbackAtLeastOnce = YES;
 			}
 			if ((currentEventFlags & kFSEventStreamEventFlagItemChangeOwner) != 0) {
-				[userInfoObj.callbackHandler fsItemOwnershipModifiedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsItemOwnershipModifiedAtPath:itemType:eventId:becauseOfUs:)])
+					[userInfoObj.callbackHandler fsItemOwnershipModifiedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
 				calledCallbackAtLeastOnce = YES;
 			}
 			if ((currentEventFlags & kFSEventStreamEventFlagItemXattrMod) != 0) {
-				[userInfoObj.callbackHandler fsItemXattrModifiedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsItemXattrModifiedAtPath:itemType:eventId:becauseOfUs:)])
+					[userInfoObj.callbackHandler fsItemXattrModifiedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
 				calledCallbackAtLeastOnce = YES;
 			}
 			if ((currentEventFlags & kFSEventStreamEventFlagItemCloned) != 0) {
-				[userInfoObj.callbackHandler fsItemClonedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsItemClonedAtPath:itemType:eventId:becauseOfUs:)])
+					[userInfoObj.callbackHandler fsItemClonedAtPath:currentEventPath itemType:itemType eventId:currentEventId becauseOfUs:fromUs];
 				calledCallbackAtLeastOnce = YES;
 			}
 			if (!calledCallbackAtLeastOnce) {
 				NSLog(@"Got unknown event %u for path %@", currentEventFlags, currentEventPath);
-				[userInfoObj.callbackHandler fsChangedInFolder:currentEventPath eventId:currentEventId becauseOfUs:fromUs];
+				if ([userInfoObj.callbackHandler respondsToSelector:@selector(fsChangedInFolder:eventId:becauseOfUs:)])
+					[userInfoObj.callbackHandler fsChangedInFolder:currentEventPath eventId:currentEventId becauseOfUs:fromUs];
 			}
 		}
 	}
