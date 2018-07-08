@@ -41,7 +41,10 @@ static void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCal
 	CFSEventUserInfo *userInfoObj = clientCallBackInfo;
 	CFArrayRef eventPaths = eventPathsAsVoidPtr;
 	
+	NSLog(@"New event loop:");
 	for (size_t i = 0; i < numEvents; ++i) {
+		NSLog(@"   Event id: %llu, Event flags: 0x%x, Event path: %@", eventIds[i], eventFlags[i], CFArrayGetValueAtIndex(eventPaths, i));
+		
 		FSEventStreamEventId currentEventId = eventIds[i];
 		NSString *currentEventPath = CFArrayGetValueAtIndex(eventPaths, i);
 		FSEventStreamEventFlags currentEventFlags = eventFlags[i];
