@@ -16,6 +16,10 @@
 		7B8C3EEB20EF76950001D2B3 /* CFSEventUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE920EF76950001D2B3 /* CFSEventUserInfo.m */; };
 		7B8C3EED20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EEC20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B8C3EEF20EF77310001D2B3 /* FSEventsWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EEE20EF77310001D2B3 /* FSEventsWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7BE3263720F376190046129C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE3263620F376190046129C /* main.swift */; };
+		7BE3263B20F376290046129C /* FSEventsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE620EF768F0001D2B3 /* FSEventsWrapper.swift */; };
+		7BE3263C20F376290046129C /* FSEventsWrapperPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE120EF76660001D2B3 /* FSEventsWrapperPrivate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7BE3263D20F376290046129C /* CFSEventUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE920EF76950001D2B3 /* CFSEventUserInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +31,18 @@
 			remoteInfo = FSEventsWrapper;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7BE3263220F376190046129C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7B8C3EBA20EF736B0001D2B3 /* FSEventsWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FSEventsWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +57,9 @@
 		7B8C3EE920EF76950001D2B3 /* CFSEventUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFSEventUserInfo.m; sourceTree = "<group>"; };
 		7B8C3EEC20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEventStreamCallbackHandler.h; sourceTree = "<group>"; };
 		7B8C3EEE20EF77310001D2B3 /* FSEventsWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEventsWrapper.h; sourceTree = "<group>"; };
+		7BE3263420F376190046129C /* FSEventsWrapperDirectLinkTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FSEventsWrapperDirectLinkTest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BE3263620F376190046129C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		7BE3263E20F376950046129C /* FSEventsWrapperDirectLinkTest-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FSEventsWrapperDirectLinkTest-BridgingHeader.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +78,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7BE3263120F376190046129C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -67,6 +93,7 @@
 			children = (
 				7B8C3EBC20EF736B0001D2B3 /* FSEventsWrapper */,
 				7B8C3EC720EF736B0001D2B3 /* FSEventsWrapperTests */,
+				7BE3263520F376190046129C /* FSEventsWrapperDirectLinkTest */,
 				7B8C3EBB20EF736B0001D2B3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -76,6 +103,7 @@
 			children = (
 				7B8C3EBA20EF736B0001D2B3 /* FSEventsWrapper.framework */,
 				7B8C3EC320EF736B0001D2B3 /* FSEventsWrapperTests.xctest */,
+				7BE3263420F376190046129C /* FSEventsWrapperDirectLinkTest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,6 +130,15 @@
 				7B8C3ECA20EF736B0001D2B3 /* Info.plist */,
 			);
 			path = FSEventsWrapperTests;
+			sourceTree = "<group>";
+		};
+		7BE3263520F376190046129C /* FSEventsWrapperDirectLinkTest */ = {
+			isa = PBXGroup;
+			children = (
+				7BE3263E20F376950046129C /* FSEventsWrapperDirectLinkTest-BridgingHeader.h */,
+				7BE3263620F376190046129C /* main.swift */,
+			);
+			path = FSEventsWrapperDirectLinkTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +194,23 @@
 			productReference = 7B8C3EC320EF736B0001D2B3 /* FSEventsWrapperTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		7BE3263320F376190046129C /* FSEventsWrapperDirectLinkTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BE3263A20F376190046129C /* Build configuration list for PBXNativeTarget "FSEventsWrapperDirectLinkTest" */;
+			buildPhases = (
+				7BE3263020F376190046129C /* Sources */,
+				7BE3263120F376190046129C /* Frameworks */,
+				7BE3263220F376190046129C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FSEventsWrapperDirectLinkTest;
+			productName = hello;
+			productReference = 7BE3263420F376190046129C /* FSEventsWrapperDirectLinkTest */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -172,6 +226,9 @@
 						LastSwiftMigration = 1000;
 					};
 					7B8C3EC220EF736B0001D2B3 = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					7BE3263320F376190046129C = {
 						CreatedOnToolsVersion = 10.0;
 					};
 				};
@@ -190,6 +247,7 @@
 			targets = (
 				7B8C3EB920EF736B0001D2B3 /* FSEventsWrapper */,
 				7B8C3EC220EF736B0001D2B3 /* FSEventsWrapperTests */,
+				7BE3263320F376190046129C /* FSEventsWrapperDirectLinkTest */,
 			);
 		};
 /* End PBXProject section */
@@ -227,6 +285,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B8C3EC920EF736B0001D2B3 /* FSEventsWrapperTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BE3263020F376190046129C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BE3263720F376190046129C /* main.swift in Sources */,
+				7BE3263C20F376290046129C /* FSEventsWrapperPrivate.m in Sources */,
+				7BE3263D20F376290046129C /* CFSEventUserInfo.m in Sources */,
+				7BE3263B20F376290046129C /* FSEventsWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +518,28 @@
 			};
 			name = Release;
 		};
+		7BE3263820F376190046129C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FSEventsWrapperDirectLinkTest/FSEventsWrapperDirectLinkTest-BridgingHeader.h";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		7BE3263920F376190046129C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FSEventsWrapperDirectLinkTest/FSEventsWrapperDirectLinkTest-BridgingHeader.h";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -475,6 +566,15 @@
 			buildConfigurations = (
 				7B8C3ED220EF736B0001D2B3 /* Debug */,
 				7B8C3ED320EF736B0001D2B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BE3263A20F376190046129C /* Build configuration list for PBXNativeTarget "FSEventsWrapperDirectLinkTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BE3263820F376190046129C /* Debug */,
+				7BE3263920F376190046129C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
