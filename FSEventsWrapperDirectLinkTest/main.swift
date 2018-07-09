@@ -29,7 +29,11 @@ w.startWatching()
 
 Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false){ t in
 	let f = fopen("/Users/frizlab/Downloads/FSEventsWrapperDirectLinkTest.\(Int.random(in: 0..<250)).test", "w+")
-	fclose(f)
+	Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false){ t in
+		var i: UInt = 0
+		fwrite(&i, MemoryLayout<UInt>.size, 1, f)
+		fclose(f)
+	}
 }
 
 repeat {
