@@ -1,10 +1,10 @@
 /*
- * FSEventsWrapper.swift
- * Duplicated Sound Finder
- *
- * Created by François LAMBOLEY on 10/11/14.
- * Copyright (c) 2014 Frost Land. All rights reserved.
- */
+ * FSEventsWrapper.swift
+ * FSEventsWrapper
+ *
+ * Created by François LAMBOLEY on 10/11/14.
+ * Copyright (c) 2014 Frost Land. All rights reserved.
+ */
 
 import Foundation
 
@@ -32,7 +32,7 @@ public class FSEventsWrapper {
 	/**
 	- parameter paths: The paths to monitor.
 	
-	- parameter since?:
+	- parameter startId:
 		When do we start monitoring the paths from? Allows replaying older events
 		at the given paths.
 		
@@ -56,27 +56,28 @@ public class FSEventsWrapper {
 	
 	- parameter callbackHandler: Your handler object.
 	
-	- parameter runLoop?:
+	- parameter runLoop:
 		The run loop on which the stream should be scheduled. If nil, the stream
 		will be scheduled on the **current** run loop.
 	
-	- parameter runLoopMode?:
+	- parameter runLoopMode:
 		The run loop mode on which the stream should be scheduled. If nil, the
 		default run loop mode will be used.
 	*/
 	public init(
 		paths: [String],
-		since startId: FSEventStreamEventId? = nil, updateInterval: CFTimeInterval = 0, fsEventStreamFlags flags: FSEventStreamCreateFlags = FSEventStreamCreateFlags(kFSEventStreamCreateFlagNone),
+		since startId: FSEventStreamEventId? = nil, updateInterval: CFTimeInterval = 0,
+		fsEventStreamFlags: FSEventStreamCreateFlags = FSEventStreamCreateFlags(kFSEventStreamCreateFlagNone),
 		callbackHandler: FSEventStreamCallbackHandler,
-		runLoop rl: RunLoop = .current, runLoopMode rlm: RunLoop.Mode = .default
+		runLoop: RunLoop = .current, runLoopMode: RunLoop.Mode = .default
 	) {
 		let cfpaths: CFArray = paths as CFArray
 		let actualStartId = startId ?? FSEventStreamEventId(kFSEventStreamEventIdSinceNow)
-		let actualFlags = FSEventStreamCreateFlags(kFSEventStreamCreateFlagUseCFTypes | Int(flags))
+		let actualFlags = FSEventStreamCreateFlags(kFSEventStreamCreateFlagUseCFTypes | Int(fsEventStreamFlags))
 		
-		runLoopMode = rlm
-		runLoop = rl.getCFRunLoop()
-		eventStream = CCreateFSEventStream(cfpaths, actualStartId, updateInterval, actualFlags, callbackHandler)
+		self.runLoopMode = runLoopMode
+		self.runLoop = runLoop.getCFRunLoop()
+		self.eventStream = CCreateFSEventStream(cfpaths, actualStartId, updateInterval, actualFlags, callbackHandler)
 	}
 	
 	deinit {

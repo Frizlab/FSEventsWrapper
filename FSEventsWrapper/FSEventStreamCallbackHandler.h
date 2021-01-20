@@ -1,6 +1,6 @@
 /*
  * FSEventStreamCallbackHandler.h
- * Duplicated Sound Finder
+ * FSEventsWrapper
  *
  * Created by François Lamboley on 24/05/15.
  * Copyright (c) 2015 Frost Land. All rights reserved.
