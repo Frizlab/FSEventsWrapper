@@ -77,18 +77,30 @@ public class FSEventStream {
 		self.runLoopMode = runLoopMode
 		self.runLoop = runLoop.getCFRunLoop()
 		
-		guard let s = FSEventStreamCreate(
-			kCFAllocatorDefault,
-			eventStreamCallback,
-			nil, //UnsafeMutablePointer<FSEventStreamContext>?
-			cfpaths,
-			actualStartId,
-			updateInterval,
-			actualFlags
-		) else {
+		let objcWrapper = FSEventStreamObjCWrapper()
+		var context = FSEventStreamContext(
+			version: 0,
+			info: unsafeBitCast(objcWrapper, to: UnsafeMutableRawPointer.self),
+			retain: { ptrToRetain in
+				guard let ptrToRetain = ptrToRetain else {return nil}
+				let u = Unmanaged.passRetained(unsafeBitCast(ptrToRetain, to: FSEventStreamObjCWrapper.self))
+				return unsafeBitCast(u.takeUnretainedValue(), to: UnsafeRawPointer.self)
+			}, release: { ptrToRelease in
+				guard let ptrToRelease = ptrToRelease else {return}
+				let u = Unmanaged.passUnretained(unsafeBitCast(ptrToRelease, to: FSEventStreamObjCWrapper.self))
+				u.release()
+			}, copyDescription: { ptrToDescribe -> Unmanaged<CFString>? in
+				guard let ptrToDescribe = ptrToDescribe else {return nil}
+				let description = unsafeBitCast(ptrToDescribe, to: FSEventStreamObjCWrapper.self).description as CFString
+				return Unmanaged.passUnretained(description) /* Not sure if correct unmanaged method called here */
+			}
+		)
+		guard let s = FSEventStreamCreate(kCFAllocatorDefault, eventStreamCallback, &context, cfpaths, actualStartId, updateInterval, actualFlags) else {
 			return nil
 		}
 		self.eventStream = s
+		
+		objcWrapper.swiftStream = self
 	}
 	
 	deinit {
@@ -114,6 +126,13 @@ public class FSEventStream {
 }
 
 
+private class FSEventStreamObjCWrapper : NSObject {
+	
+	weak var swiftStream: FSEventStream?
+	
+}
+
+
 private func eventStreamCallback(
 	streamRef: ConstFSEventStreamRef,
 	clientCallBackInfo: UnsafeMutableRawPointer?,
@@ -122,5 +141,8 @@ private func eventStreamCallback(
 	eventFlags: UnsafePointer<FSEventStreamEventFlags>,
 	eventIds: UnsafePointer<FSEventStreamEventId>
 ) {
-	NSLog("Hello!")
+	guard let clientCallBackInfo = clientCallBackInfo, let swiftStream = unsafeBitCast(clientCallBackInfo, to: FSEventStreamObjCWrapper.self).swiftStream else {
+		return
+	}
+	NSLog("%@", "\(swiftStream)")
 }
