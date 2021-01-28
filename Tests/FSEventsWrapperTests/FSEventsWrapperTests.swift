@@ -11,34 +11,32 @@ import XCTest
 
 
 
-class FSEventsWrapperTests: XCTestCase, FSEventStreamCallbackHandler {
+class FSEventsWrapperTests: XCTestCase {
 	
-	var callbackCount = 0
 	var monitoredFolder: String!
-	
-	var fsChangedHandler: ((_ folder: String, _ eventId: FSEventStreamEventId, _ fromUs: Bool) -> Void)?
 	
 	override func setUp() {
 		super.setUp()
-		
-		callbackCount = 0
-		fsChangedHandler = nil
 		
 		monitoredFolder = (NSTemporaryDirectory() as NSString).appendingPathComponent("test.\(Int.random(in: 0 ... .max))")
 		try! FileManager.default.createDirectory(at: URL(fileURLWithPath: monitoredFolder, isDirectory: true), withIntermediateDirectories: true, attributes: nil)
 	}
 	
 	override func tearDown() {
-		try! FileManager.default.removeItem(atPath: monitoredFolder)
+		_ = try? FileManager.default.removeItem(atPath: monitoredFolder)
 		
 		super.tearDown()
 	}
 	
 	func testBasicMonitoring() {
-		let e = FSEventsWrapper(path: monitoredFolder, callbackHandler: self)
+		let handler = { (stream: FSEventStream, event: FSEvent) in
+			stream.stopWatching()
+			NSLog("ok")
+		}
 		
-		fsChangedHandler = { folder, eventId, fromUs in
-			e.stopWatching()
+		guard let e = FSEventStream(path: monitoredFolder, callback: handler) else {
+			XCTFail("Cannot create FSEventStream")
+			return
 		}
 		
 		e.startWatching()
@@ -52,10 +50,6 @@ class FSEventsWrapperTests: XCTestCase, FSEventStreamCallbackHandler {
 			RunLoop.main.run(mode: .default, before: Date(timeIntervalSinceNow: 9))
 		} while e.isStarted && -startDate.timeIntervalSinceNow < 9
 		XCTAssert(!e.isStarted)
-	}
-	
-	func fsChanged(inFolder folderPath: String, eventId: FSEventStreamEventId, becauseOfUs isEventFromUs: Bool) {
-		fsChangedHandler?(folderPath, eventId, isEventFromUs)
 	}
 	
 }

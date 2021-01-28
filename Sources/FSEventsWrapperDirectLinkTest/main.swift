@@ -8,7 +8,6 @@
 
 import Foundation
 
-import FSEventsWrapperCommon
 
 
 /* This target has been created to check whether the “mark self” options would
@@ -16,7 +15,7 @@ import FSEventsWrapperCommon
  * does not… */
 
 
-class CallbackHandler : NSObject, FSEventStreamCallbackHandler {
+class CallbackHandler : NSObject {
 	
 	func fsChanged(inFolder folderPath: String, eventId: FSEventStreamEventId, becauseOfUs isEventFromUs: Bool) {
 		NSLog("%@ - %@", String(isEventFromUs), folderPath)
@@ -26,7 +25,7 @@ class CallbackHandler : NSObject, FSEventStreamCallbackHandler {
 
 
 let callbackHandler = CallbackHandler()
-let w = FSEventsWrapper(path: "/Users/frizlab/Downloads", fsEventStreamFlags: FSEventStreamCreateFlags(kFSEventStreamCreateFlagMarkSelf), callbackHandler: callbackHandler)
+let w = FSEventStream(path: "/Users/frizlab/Downloads", fsEventStreamFlags: FSEventStreamCreateFlags(kFSEventStreamCreateFlagMarkSelf), callbackHandler: callbackHandler)
 w.startWatching()
 
 Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false){ t in

@@ -1,5 +1,5 @@
 /*
- * Callback.swift
+ * FSEvent.swift
  * FSEventsWrapper
  *
  * Created by François Lamboley on 09/07/2018.
@@ -10,9 +10,9 @@ import Foundation
 
 
 
-enum Event {
+public enum FSEvent {
 	
-	enum MustScanSubDirsReason {
+	public enum MustScanSubDirsReason {
 		
 		case userDropped
 		case kernelDropped
@@ -21,7 +21,7 @@ enum Event {
 		
 	}
 	
-	enum ItemType {
+	public enum ItemType {
 		
 		case file
 		case dir
@@ -47,13 +47,15 @@ enum Event {
 	/** kFSEventStreamEventFlagNone or unknown flag. */
 	case generic(path: String, eventId: FSEventStreamEventId, fromUs: Bool?)
 	
-	/** kFSEventStreamEventFlagMustScanSubDirs,
-	kFSEventStreamEventFlagUserDropped & kFSEventStreamEventFlagKernelDropped.
+	/**
+	kFSEventStreamEventFlagMustScanSubDirs, kFSEventStreamEventFlagUserDropped &
+	kFSEventStreamEventFlagKernelDropped.
 	
 	- note: Not sending the event stream id; it probably has no meaning here. */
 	case mustScanSubDirs(path: String, reason: MustScanSubDirsReason)
 	
-	/** kFSEventStreamEventFlagEventIdsWrapped
+	/**
+	kFSEventStreamEventFlagEventIdsWrapped
 	
 	The important thing to know is you should retrieve the UUID for the monitored
 	device with `FSEventsCopyUUIDForDevice` if you plan on saving the event id to
@@ -69,12 +71,14 @@ enum Event {
 	In any case, the event id counter will probably never wrap (too big to wrap). */
 	case eventIdsWrapped
 	
-	/** kFSEventStreamEventFlagHistoryDone
+	/**
+	kFSEventStreamEventFlagHistoryDone
 	
 	Not called if monitoring started from now. */
 	case streamHistoryDone
 	
-	/** kFSEventStreamEventFlagRootChanged
+	/**
+	kFSEventStreamEventFlagRootChanged
 	
 	Not called if kFSEventStreamCreateFlagWatchRoot is not set when creating the
 	stream.
@@ -85,28 +89,30 @@ enum Event {
 	- note: I don't know if the “event is from us” flag is set for this event. */
 	case rootChanged(path: String, fromUs: Bool?)
 	
-	/** kFSEventStreamEventFlagMount
+	/**
+	kFSEventStreamEventFlagMount
 	
 	- note: I don't know if the “event is from us” flag is set for this event,
 	nor if the event id has any meaning here… I don’t know if there is a valid
 	event id for this event (probably not). */
 	case volumeMounted(path: String, eventId: FSEventStreamEventId, fromUs: Bool?)
 	
-	/** kFSEventStreamEventFlagUnmount
+	/**
+	kFSEventStreamEventFlagUnmount
 	
 	- note: I don't know if the “event is from us” flag is set for this event,
 	nor if the event id has any meaning here… I don’t know if there is a valid
 	event id for this event (probably not). */
 	case volumeUnmounted(path: String, eventId: FSEventStreamEventId, fromUs: Bool?)
 	
-	/* *********************************************************************** *\
-	|All methods below are called only if kFSEventStreamCreateFlagFileEvents was
-	|set when the stream was created… says the doc. But actually, it is not true
-	|on Yosemite (not tested on other OSs)! The events for file creation,
-	|deletion, renaming, etc. are set even when the flag was not set… The only
-	|difference is the events are sent for the parent folder only, and not for
-	|each file when the flag is not set.
-	\* *********************************************************************** */
+	/* **************************************************************************
+	 * All methods below are called only if kFSEventStreamCreateFlagFileEvents
+	 * was set when the stream was created… says the doc. But actually, it is not
+	 * true on Yosemite (not tested on other OSs). The events for file creation,
+	 * deletion, renaming, etc. are set even when the flag was not set… The only
+	 * difference is the events are sent for the parent folder only, and not for
+	 * each file when the flag is not set.
+	 * ************************************************************************** */
 	
 	/* itemType refers to the kFSEventStreamEventFlagItemIsFile,
 	 * kFSEventStreamEventFlagItemIsDir, kFSEventStreamEventFlagItemIsSymlink,
@@ -122,7 +128,8 @@ enum Event {
 	/** kFSEventStreamEventFlagItemInodeMetaMod */
 	case itemInodeMetadataModified(path: String, itemType: ItemType, eventId: FSEventStreamEventId, fromUs: Bool?)
 	
-	/** kFSEventStreamEventFlagItemRenamed
+	/**
+	kFSEventStreamEventFlagItemRenamed
 	
 	`path` is either the new name or the old name of the file. You should be
 	called twice, once for the new name, once for the old name (assuming both
@@ -146,13 +153,7 @@ enum Event {
 	case itemXattrModified(path: String, itemType: ItemType, eventId: FSEventStreamEventId, fromUs: Bool?)
 	
 	/** kFSEventStreamEventFlagItemCloned */
-	@available(OSX 10.13, iOS 11.0, *)
+	@available(macOS 10.13, macCatalyst 11.0, *)
 	case itemClonedAtPath(path: String, itemType: ItemType, eventId: FSEventStreamEventId, fromUs: Bool?)
-	
-}
-
-protocol Callback {
-	
-	func fsEventReceived(event: Event)
 	
 }
