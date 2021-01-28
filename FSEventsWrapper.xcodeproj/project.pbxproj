@@ -7,19 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B28996325C330CD0088DF83 /* CCreateFSEventStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE120EF76660001D2B3 /* CCreateFSEventStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7B28996425C330CD0088DF83 /* CFSEventUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE920EF76950001D2B3 /* CFSEventUserInfo.m */; };
+		7B2899A425C335ED0088DF83 /* CCreateFSEventStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EE420EF767E0001D2B3 /* CCreateFSEventStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B2899B125C3360D0088DF83 /* FSEventStreamCallbackHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EEC20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B2899BA25C336480088DF83 /* CCreateFSEventStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE120EF76660001D2B3 /* CCreateFSEventStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7B2899BF25C3364B0088DF83 /* CFSEventUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE920EF76950001D2B3 /* CFSEventUserInfo.m */; };
+		7B2899E125C337920088DF83 /* CCreateFSEventStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE120EF76660001D2B3 /* CCreateFSEventStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7B2899E225C337920088DF83 /* CFSEventUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE920EF76950001D2B3 /* CFSEventUserInfo.m */; };
+		7B2899E725C337970088DF83 /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE3263F20F37CB80046129C /* Callback.swift */; };
+		7B695C0125C0B57F00D0DBE1 /* FSEventsWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EEE20EF77310001D2B3 /* FSEventsWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B695C0B25C0B59100D0DBE1 /* CCreateFSEventStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EE420EF767E0001D2B3 /* CCreateFSEventStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B695C1025C0B59800D0DBE1 /* CFSEventUserInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EE820EF76950001D2B3 /* CFSEventUserInfo.h */; };
+		7B695C1F25C0B5B300D0DBE1 /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE3263F20F37CB80046129C /* Callback.swift */; };
+		7B695C2425C0B5B700D0DBE1 /* FSEventsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE620EF768F0001D2B3 /* FSEventsWrapper.swift */; };
+		7B695D7125C212EF00D0DBE1 /* FSEventsWrapper-static.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B695D7025C212AD00D0DBE1 /* FSEventsWrapper-static.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B7D084425C245560076FF14 /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = 7B695D6325C2107C00D0DBE1 /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B7D08D725C253310076FF14 /* FSEventStreamCallbackHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EEC20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B8C3EC420EF736B0001D2B3 /* FSEventsWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B8C3EBA20EF736B0001D2B3 /* FSEventsWrapper.framework */; };
 		7B8C3EC920EF736B0001D2B3 /* FSEventsWrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EC820EF736B0001D2B3 /* FSEventsWrapperTests.swift */; };
-		7B8C3EE320EF76660001D2B3 /* FSEventsWrapperPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE120EF76660001D2B3 /* FSEventsWrapperPrivate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7B8C3EE520EF767E0001D2B3 /* FSEventsWrapperPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EE420EF767E0001D2B3 /* FSEventsWrapperPrivate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B8C3EE720EF768F0001D2B3 /* FSEventsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE620EF768F0001D2B3 /* FSEventsWrapper.swift */; };
-		7B8C3EEA20EF76950001D2B3 /* CFSEventUserInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EE820EF76950001D2B3 /* CFSEventUserInfo.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		7B8C3EEB20EF76950001D2B3 /* CFSEventUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE920EF76950001D2B3 /* CFSEventUserInfo.m */; };
-		7B8C3EED20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EEC20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B8C3EEF20EF77310001D2B3 /* FSEventsWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C3EEE20EF77310001D2B3 /* FSEventsWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BE3263720F376190046129C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE3263620F376190046129C /* main.swift */; };
 		7BE3263B20F376290046129C /* FSEventsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE620EF768F0001D2B3 /* FSEventsWrapper.swift */; };
-		7BE3263C20F376290046129C /* FSEventsWrapperPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE120EF76660001D2B3 /* FSEventsWrapperPrivate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7BE3263D20F376290046129C /* CFSEventUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3EE920EF76950001D2B3 /* CFSEventUserInfo.m */; };
 		7BE3264020F37CB80046129C /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE3263F20F37CB80046129C /* Callback.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,21 +56,26 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7B2899C425C336830088DF83 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		7B695D5725C20FF000D0DBE1 /* module-dynamic.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = "module-dynamic.modulemap"; sourceTree = "<group>"; };
+		7B695D6325C2107C00D0DBE1 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		7B695D7025C212AD00D0DBE1 /* FSEventsWrapper-static.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FSEventsWrapper-static.h"; sourceTree = "<group>"; };
 		7B8C3EBA20EF736B0001D2B3 /* FSEventsWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FSEventsWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B8C3EBE20EF736B0001D2B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B8C3EBE20EF736B0001D2B3 /* Framework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Framework-Info.plist"; sourceTree = "<group>"; };
 		7B8C3EC320EF736B0001D2B3 /* FSEventsWrapperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FSEventsWrapperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B8C3EC820EF736B0001D2B3 /* FSEventsWrapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSEventsWrapperTests.swift; sourceTree = "<group>"; };
-		7B8C3ECA20EF736B0001D2B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7B8C3EE120EF76660001D2B3 /* FSEventsWrapperPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSEventsWrapperPrivate.m; sourceTree = "<group>"; };
-		7B8C3EE420EF767E0001D2B3 /* FSEventsWrapperPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEventsWrapperPrivate.h; sourceTree = "<group>"; };
+		7B8C3ECA20EF736B0001D2B3 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
+		7B8C3EE120EF76660001D2B3 /* CCreateFSEventStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCreateFSEventStream.m; sourceTree = "<group>"; };
+		7B8C3EE420EF767E0001D2B3 /* CCreateFSEventStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCreateFSEventStream.h; sourceTree = "<group>"; };
 		7B8C3EE620EF768F0001D2B3 /* FSEventsWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSEventsWrapper.swift; sourceTree = "<group>"; };
 		7B8C3EE820EF76950001D2B3 /* CFSEventUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFSEventUserInfo.h; sourceTree = "<group>"; };
 		7B8C3EE920EF76950001D2B3 /* CFSEventUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFSEventUserInfo.m; sourceTree = "<group>"; };
 		7B8C3EEC20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEventStreamCallbackHandler.h; sourceTree = "<group>"; };
 		7B8C3EEE20EF77310001D2B3 /* FSEventsWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEventsWrapper.h; sourceTree = "<group>"; };
+		7B8FE97625BE251000B41DAD /* Scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Scripts; sourceTree = "<group>"; };
+		7BC532E525C08FFE00F5BB8F /* libFSEventsWrapper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFSEventsWrapper.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE3263420F376190046129C /* FSEventsWrapperDirectLinkTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FSEventsWrapperDirectLinkTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE3263620F376190046129C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		7BE3263E20F376950046129C /* FSEventsWrapperDirectLinkTest-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FSEventsWrapperDirectLinkTest-BridgingHeader.h"; sourceTree = "<group>"; };
 		7BE3263F20F37CB80046129C /* Callback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Callback.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +95,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7BC532E325C08FFE00F5BB8F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BE3263120F376190046129C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -90,12 +112,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B28997D25C332D20088DF83 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7B2899C425C336830088DF83 /* module.modulemap */,
+				7B8C3EEC20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h */,
+				7B8C3EE420EF767E0001D2B3 /* CCreateFSEventStream.h */,
+				7B8C3EE120EF76660001D2B3 /* CCreateFSEventStream.m */,
+				7B8C3EE820EF76950001D2B3 /* CFSEventUserInfo.h */,
+				7B8C3EE920EF76950001D2B3 /* CFSEventUserInfo.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		7B695E1A25C2218B00D0DBE1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7B8C3EB020EF736B0001D2B3 = {
 			isa = PBXGroup;
 			children = (
-				7B8C3EBC20EF736B0001D2B3 /* FSEventsWrapper */,
-				7B8C3EC720EF736B0001D2B3 /* FSEventsWrapperTests */,
-				7BE3263520F376190046129C /* FSEventsWrapperDirectLinkTest */,
+				7B8FE96C25B8D60700B41DAD /* Sources */,
+				7B8FE96E25B8D63700B41DAD /* Tests */,
+				7B8FE96D25B8D62200B41DAD /* Xcode Supporting Files */,
+				7B8FE97625BE251000B41DAD /* Scripts */,
+				7B695E1A25C2218B00D0DBE1 /* Frameworks */,
 				7B8C3EBB20EF736B0001D2B3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,6 +150,7 @@
 				7B8C3EBA20EF736B0001D2B3 /* FSEventsWrapper.framework */,
 				7B8C3EC320EF736B0001D2B3 /* FSEventsWrapperTests.xctest */,
 				7BE3263420F376190046129C /* FSEventsWrapperDirectLinkTest */,
+				7BC532E525C08FFE00F5BB8F /* libFSEventsWrapper.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,15 +158,10 @@
 		7B8C3EBC20EF736B0001D2B3 /* FSEventsWrapper */ = {
 			isa = PBXGroup;
 			children = (
-				7BE3263F20F37CB80046129C /* Callback.swift */,
 				7B8C3EEE20EF77310001D2B3 /* FSEventsWrapper.h */,
+				7BE3263F20F37CB80046129C /* Callback.swift */,
 				7B8C3EE620EF768F0001D2B3 /* FSEventsWrapper.swift */,
-				7B8C3EE420EF767E0001D2B3 /* FSEventsWrapperPrivate.h */,
-				7B8C3EE120EF76660001D2B3 /* FSEventsWrapperPrivate.m */,
-				7B8C3EE820EF76950001D2B3 /* CFSEventUserInfo.h */,
-				7B8C3EE920EF76950001D2B3 /* CFSEventUserInfo.m */,
-				7B8C3EEC20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h */,
-				7B8C3EBE20EF736B0001D2B3 /* Info.plist */,
+				7B28997D25C332D20088DF83 /* Common */,
 			);
 			path = FSEventsWrapper;
 			sourceTree = "<group>";
@@ -130,15 +170,42 @@
 			isa = PBXGroup;
 			children = (
 				7B8C3EC820EF736B0001D2B3 /* FSEventsWrapperTests.swift */,
-				7B8C3ECA20EF736B0001D2B3 /* Info.plist */,
 			);
 			path = FSEventsWrapperTests;
+			sourceTree = "<group>";
+		};
+		7B8FE96C25B8D60700B41DAD /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				7B8C3EBC20EF736B0001D2B3 /* FSEventsWrapper */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		7B8FE96D25B8D62200B41DAD /* Xcode Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7B695D7025C212AD00D0DBE1 /* FSEventsWrapper-static.h */,
+				7B695D6325C2107C00D0DBE1 /* module.modulemap */,
+				7B695D5725C20FF000D0DBE1 /* module-dynamic.modulemap */,
+				7B8C3EBE20EF736B0001D2B3 /* Framework-Info.plist */,
+				7B8C3ECA20EF736B0001D2B3 /* Tests-Info.plist */,
+			);
+			path = "Xcode Supporting Files";
+			sourceTree = "<group>";
+		};
+		7B8FE96E25B8D63700B41DAD /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7B8C3EC720EF736B0001D2B3 /* FSEventsWrapperTests */,
+				7BE3263520F376190046129C /* FSEventsWrapperDirectLinkTest */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		7BE3263520F376190046129C /* FSEventsWrapperDirectLinkTest */ = {
 			isa = PBXGroup;
 			children = (
-				7BE3263E20F376950046129C /* FSEventsWrapperDirectLinkTest-BridgingHeader.h */,
 				7BE3263620F376190046129C /* main.swift */,
 			);
 			path = FSEventsWrapperDirectLinkTest;
@@ -151,19 +218,31 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B8C3EE520EF767E0001D2B3 /* FSEventsWrapperPrivate.h in Headers */,
-				7B8C3EEA20EF76950001D2B3 /* CFSEventUserInfo.h in Headers */,
+				7B2899A425C335ED0088DF83 /* CCreateFSEventStream.h in Headers */,
 				7B8C3EEF20EF77310001D2B3 /* FSEventsWrapper.h in Headers */,
-				7B8C3EED20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h in Headers */,
+				7B2899B125C3360D0088DF83 /* FSEventStreamCallbackHandler.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BC532E125C08FFE00F5BB8F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B7D084425C245560076FF14 /* module.modulemap in Headers */,
+				7B695D7125C212EF00D0DBE1 /* FSEventsWrapper-static.h in Headers */,
+				7B7D08D725C253310076FF14 /* FSEventStreamCallbackHandler.h in Headers */,
+				7B695C0125C0B57F00D0DBE1 /* FSEventsWrapper.h in Headers */,
+				7B695C0B25C0B59100D0DBE1 /* CCreateFSEventStream.h in Headers */,
+				7B695C1025C0B59800D0DBE1 /* CFSEventUserInfo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		7B8C3EB920EF736B0001D2B3 /* FSEventsWrapper */ = {
+		7B8C3EB920EF736B0001D2B3 /* FSEventsWrapper-dynamic */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7B8C3ECE20EF736B0001D2B3 /* Build configuration list for PBXNativeTarget "FSEventsWrapper" */;
+			buildConfigurationList = 7B8C3ECE20EF736B0001D2B3 /* Build configuration list for PBXNativeTarget "FSEventsWrapper-dynamic" */;
 			buildPhases = (
 				7B8C3EB520EF736B0001D2B3 /* Headers */,
 				7B8C3EB620EF736B0001D2B3 /* Sources */,
@@ -174,14 +253,14 @@
 			);
 			dependencies = (
 			);
-			name = FSEventsWrapper;
+			name = "FSEventsWrapper-dynamic";
 			productName = FSEventsWrapper;
 			productReference = 7B8C3EBA20EF736B0001D2B3 /* FSEventsWrapper.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		7B8C3EC220EF736B0001D2B3 /* FSEventsWrapperTests */ = {
+		7B8C3EC220EF736B0001D2B3 /* FSEventsWrapper-dynamic-Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7B8C3ED120EF736B0001D2B3 /* Build configuration list for PBXNativeTarget "FSEventsWrapperTests" */;
+			buildConfigurationList = 7B8C3ED120EF736B0001D2B3 /* Build configuration list for PBXNativeTarget "FSEventsWrapper-dynamic-Tests" */;
 			buildPhases = (
 				7B8C3EBF20EF736B0001D2B3 /* Sources */,
 				7B8C3EC020EF736B0001D2B3 /* Frameworks */,
@@ -192,10 +271,27 @@
 			dependencies = (
 				7B8C3EC620EF736B0001D2B3 /* PBXTargetDependency */,
 			);
-			name = FSEventsWrapperTests;
+			name = "FSEventsWrapper-dynamic-Tests";
 			productName = FSEventsWrapperTests;
 			productReference = 7B8C3EC320EF736B0001D2B3 /* FSEventsWrapperTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7BC532E425C08FFE00F5BB8F /* FSEventsWrapper-static */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BC532EB25C08FFE00F5BB8F /* Build configuration list for PBXNativeTarget "FSEventsWrapper-static" */;
+			buildPhases = (
+				7BC532E125C08FFE00F5BB8F /* Headers */,
+				7BC532E225C08FFE00F5BB8F /* Sources */,
+				7BC532E325C08FFE00F5BB8F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FSEventsWrapper-static";
+			productName = "FSEventsWrapper-static";
+			productReference = 7BC532E525C08FFE00F5BB8F /* libFSEventsWrapper.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 		7BE3263320F376190046129C /* FSEventsWrapperDirectLinkTest */ = {
 			isa = PBXNativeTarget;
@@ -232,6 +328,9 @@
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1230;
 					};
+					7BC532E425C08FFE00F5BB8F = {
+						CreatedOnToolsVersion = 12.3;
+					};
 					7BE3263320F376190046129C = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1230;
@@ -251,8 +350,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7B8C3EB920EF736B0001D2B3 /* FSEventsWrapper */,
-				7B8C3EC220EF736B0001D2B3 /* FSEventsWrapperTests */,
+				7BC532E425C08FFE00F5BB8F /* FSEventsWrapper-static */,
+				7B8C3EB920EF736B0001D2B3 /* FSEventsWrapper-dynamic */,
+				7B8C3EC220EF736B0001D2B3 /* FSEventsWrapper-dynamic-Tests */,
 				7BE3263320F376190046129C /* FSEventsWrapperDirectLinkTest */,
 			);
 		};
@@ -280,9 +380,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B8C3EE320EF76660001D2B3 /* FSEventsWrapperPrivate.m in Sources */,
-				7B8C3EEB20EF76950001D2B3 /* CFSEventUserInfo.m in Sources */,
+				7B2899BA25C336480088DF83 /* CCreateFSEventStream.m in Sources */,
 				7BE3264020F37CB80046129C /* Callback.swift in Sources */,
+				7B2899BF25C3364B0088DF83 /* CFSEventUserInfo.m in Sources */,
 				7B8C3EE720EF768F0001D2B3 /* FSEventsWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,13 +395,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7BC532E225C08FFE00F5BB8F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B28996325C330CD0088DF83 /* CCreateFSEventStream.m in Sources */,
+				7B695C1F25C0B5B300D0DBE1 /* Callback.swift in Sources */,
+				7B28996425C330CD0088DF83 /* CFSEventUserInfo.m in Sources */,
+				7B695C2425C0B5B700D0DBE1 /* FSEventsWrapper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BE3263020F376190046129C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B2899E725C337970088DF83 /* Callback.swift in Sources */,
+				7B2899E125C337920088DF83 /* CCreateFSEventStream.m in Sources */,
+				7B2899E225C337920088DF83 /* CFSEventUserInfo.m in Sources */,
 				7BE3263720F376190046129C /* main.swift in Sources */,
-				7BE3263C20F376290046129C /* FSEventsWrapperPrivate.m in Sources */,
-				7BE3263D20F376290046129C /* CFSEventUserInfo.m in Sources */,
 				7BE3263B20F376290046129C /* FSEventsWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,7 +423,7 @@
 /* Begin PBXTargetDependency section */
 		7B8C3EC620EF736B0001D2B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7B8C3EB920EF736B0001D2B3 /* FSEventsWrapper */;
+			target = 7B8C3EB920EF736B0001D2B3 /* FSEventsWrapper-dynamic */;
 			targetProxy = 7B8C3EC520EF736B0001D2B3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -376,6 +488,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -433,6 +546,7 @@
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -450,18 +564,18 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = FSEventsWrapper/Info.plist;
+				INFOPLIST_FILE = "Xcode Supporting Files/Framework-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULEMAP_FILE = "Xcode Supporting Files/module-dynamic.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = me.frizlab.FSEventsWrapper;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = FSEventsWrapper;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -477,17 +591,17 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = FSEventsWrapper/Info.plist;
+				INFOPLIST_FILE = "Xcode Supporting Files/Framework-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULEMAP_FILE = "Xcode Supporting Files/module-dynamic.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = me.frizlab.FSEventsWrapper;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = FSEventsWrapper;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -497,15 +611,15 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = FSEventsWrapperTests/Info.plist;
+				INFOPLIST_FILE = "Xcode Supporting Files/Tests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = me.frizlab.FSEventsWrapperTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				PRODUCT_NAME = FSEventsWrapperTests;
 			};
 			name = Debug;
 		};
@@ -515,15 +629,41 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = FSEventsWrapperTests/Info.plist;
+				INFOPLIST_FILE = "Xcode Supporting Files/Tests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = me.frizlab.FSEventsWrapperTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				PRODUCT_NAME = FSEventsWrapperTests;
+			};
+			name = Release;
+		};
+		7BC532EC25C08FFE00F5BB8F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DVL8GW97S8;
+				EXECUTABLE_PREFIX = lib;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = FSEventsWrapper;
+				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = Sources/FSEventsWrapper/Common;
+			};
+			name = Debug;
+		};
+		7BC532ED25C08FFE00F5BB8F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DVL8GW97S8;
+				EXECUTABLE_PREFIX = lib;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = FSEventsWrapper;
+				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = Sources/FSEventsWrapper/Common;
 			};
 			name = Release;
 		};
@@ -534,8 +674,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "FSEventsWrapperDirectLinkTest/FSEventsWrapperDirectLinkTest-BridgingHeader.h";
-				SWIFT_VERSION = 5.0;
+				SWIFT_INCLUDE_PATHS = Sources/FSEventsWrapper/Common;
 			};
 			name = Debug;
 		};
@@ -546,8 +685,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "FSEventsWrapperDirectLinkTest/FSEventsWrapperDirectLinkTest-BridgingHeader.h";
-				SWIFT_VERSION = 5.0;
+				SWIFT_INCLUDE_PATHS = Sources/FSEventsWrapper/Common;
 			};
 			name = Release;
 		};
@@ -563,7 +701,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7B8C3ECE20EF736B0001D2B3 /* Build configuration list for PBXNativeTarget "FSEventsWrapper" */ = {
+		7B8C3ECE20EF736B0001D2B3 /* Build configuration list for PBXNativeTarget "FSEventsWrapper-dynamic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B8C3ECF20EF736B0001D2B3 /* Debug */,
@@ -572,11 +710,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7B8C3ED120EF736B0001D2B3 /* Build configuration list for PBXNativeTarget "FSEventsWrapperTests" */ = {
+		7B8C3ED120EF736B0001D2B3 /* Build configuration list for PBXNativeTarget "FSEventsWrapper-dynamic-Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B8C3ED220EF736B0001D2B3 /* Debug */,
 				7B8C3ED320EF736B0001D2B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BC532EB25C08FFE00F5BB8F /* Build configuration list for PBXNativeTarget "FSEventsWrapper-static" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BC532EC25C08FFE00F5BB8F /* Debug */,
+				7BC532ED25C08FFE00F5BB8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

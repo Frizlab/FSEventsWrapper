@@ -2,11 +2,21 @@
  * FSEventsWrapper.swift
  * FSEventsWrapper
  *
- * Created by François LAMBOLEY on 10/11/14.
+ * Created by François Lamboley on 10/11/14.
  * Copyright (c) 2014 Frost Land. All rights reserved.
  */
 
 import Foundation
+
+#if canImport(FSEventsWrapperCommon)
+/* Static framework case, during compilation only */
+import FSEventsWrapperCommon
+import FSEventsWrapperCommon.Private
+#else
+/* “Normal” use case */
+import FSEventsWrapper.Common
+import FSEventsWrapper.Common.Private
+#endif
 
 
 

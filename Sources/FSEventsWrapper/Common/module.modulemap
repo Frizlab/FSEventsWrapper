@@ -1,0 +1,11 @@
+/* This modulemap must only be used by the static lib target and the direct link
+ * test target. */
+module FSEventsWrapperCommon {
+	header "FSEventStreamCallbackHandler.h"
+	export *
+	
+	explicit module Private {
+		header "CCreateFSEventStream.h"
+		export *
+	}
+}

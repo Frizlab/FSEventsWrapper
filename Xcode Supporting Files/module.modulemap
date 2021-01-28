@@ -1,0 +1,14 @@
+module FSEventsWrapper {
+	header "FSEventsWrapper-static.h"
+	export *
+	
+	module Common {
+		header "FSEventStreamCallbackHandler.h"
+		export *
+		
+		explicit module Private {
+			header "CCreateFSEventStream.h"
+			export *
+		}
+	}
+}

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B8C3EB920EF736B0001D2B3"
-               BuildableName = "FSEventsWrapper.framework"
-               BlueprintName = "FSEventsWrapper"
+               BlueprintIdentifier = "7BC532E425C08FFE00F5BB8F"
+               BuildableName = "libFSEventsWrapper.a"
+               BlueprintName = "FSEventsWrapper-static"
                ReferencedContainer = "container:FSEventsWrapper.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -27,26 +27,7 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7B8C3EB920EF736B0001D2B3"
-            BuildableName = "FSEventsWrapper.framework"
-            BlueprintName = "FSEventsWrapper"
-            ReferencedContainer = "container:FSEventsWrapper.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B8C3EC220EF736B0001D2B3"
-               BuildableName = "FSEventsWrapperTests.xctest"
-               BlueprintName = "FSEventsWrapperTests"
-               ReferencedContainer = "container:FSEventsWrapper.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -59,15 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7B8C3EB920EF736B0001D2B3"
-            BuildableName = "FSEventsWrapper.framework"
-            BlueprintName = "FSEventsWrapper"
-            ReferencedContainer = "container:FSEventsWrapper.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -78,9 +50,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7B8C3EB920EF736B0001D2B3"
-            BuildableName = "FSEventsWrapper.framework"
-            BlueprintName = "FSEventsWrapper"
+            BlueprintIdentifier = "7BC532E425C08FFE00F5BB8F"
+            BuildableName = "libFSEventsWrapper.a"
+            BlueprintName = "FSEventsWrapper-static"
             ReferencedContainer = "container:FSEventsWrapper.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

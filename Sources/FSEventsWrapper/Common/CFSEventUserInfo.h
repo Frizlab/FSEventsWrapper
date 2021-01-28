@@ -6,7 +6,7 @@
  * Copyright (c) 2015 Frost Land. All rights reserved.
  */
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #import "FSEventStreamCallbackHandler.h"
 

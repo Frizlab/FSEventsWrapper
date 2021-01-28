@@ -1,14 +1,15 @@
 /*
- * FSEventsWrapperPrivate.m
+ * CCreateFSEventStream.m
  * FSEventsWrapper
  *
  * Created by François Lamboley on 12/7/14.
  * Copyright (c) 2014 Frost Land. All rights reserved.
  */
 
-#import "FSEventsWrapperPrivate.h"
+#import "CCreateFSEventStream.h"
 
 #import "CFSEventUserInfo.h"
+#import "FSEventStreamCallbackHandler.h"
 
 /* !!! NO ARC IN THIS FILE !!! */
 

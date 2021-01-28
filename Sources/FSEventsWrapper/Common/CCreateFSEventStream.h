@@ -6,7 +6,7 @@
  * Copyright (c) 2014 Frost Land. All rights reserved.
  */
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #import "FSEventStreamCallbackHandler.h"
 
@@ -16,4 +16,4 @@
 FSEventStreamRef CCreateFSEventStream(CFArrayRef paths, FSEventStreamEventId startId,
 												  CFTimeInterval updateInterval,
 												  FSEventStreamCreateFlags flags,
-												  id <FSEventStreamCallbackHandler> callbackHandler);
+												  id callbackHandler);

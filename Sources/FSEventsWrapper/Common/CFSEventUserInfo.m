@@ -8,6 +8,8 @@
 
 #import "CFSEventUserInfo.h"
 
+#import "FSEventStreamCallbackHandler.h"
+
 
 
 @implementation CFSEventUserInfo

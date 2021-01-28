@@ -8,6 +8,8 @@
 
 import Foundation
 
+import FSEventsWrapperCommon
+
 
 /* This target has been created to check whether the “mark self” options would
  * work when the wrapper is linked directly and not from a Framework. Alas, it
