@@ -1,0 +1,21 @@
+= FSEventsWrapper
+François Lamboley <fload@me.com>
+
+A wrapper around FSEvents raw C APIs.
+
+== How to Use?
+TODO
+
+== State of the Project
+In this state, the project does not work except w/ direct linking. Mixing Swift
+and ObjC in a framework is not that easy and I hit a lot of corner cases.
+
+Currently everything compiles, but the xcframeworks that get generated (either
+static or dynamic) are not usable.
+
+I’ll migrate some new stuff to Swift, and things should get better.
+
+Some links I found:
+
+- https://medium.com/@yuliiasynytsia/link-static-c-library-to-swift-framework-as-a-private-module-97eae2fec75e
+- Protocol from ObjC in a mixed Framework probable compiler bug: https://stackoverflow.com/q/44975116

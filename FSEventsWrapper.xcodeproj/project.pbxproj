@@ -73,6 +73,7 @@
 		7B8C3EEC20EF76D00001D2B3 /* FSEventStreamCallbackHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEventStreamCallbackHandler.h; sourceTree = "<group>"; };
 		7B8C3EEE20EF77310001D2B3 /* FSEventsWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEventsWrapper.h; sourceTree = "<group>"; };
 		7B8FE97625BE251000B41DAD /* Scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Scripts; sourceTree = "<group>"; };
+		7BB5E94C25C33E2400F9B35B /* Readme.adoc */ = {isa = PBXFileReference; lastKnownFileType = text; path = Readme.adoc; sourceTree = "<group>"; };
 		7BC532E525C08FFE00F5BB8F /* libFSEventsWrapper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFSEventsWrapper.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE3263420F376190046129C /* FSEventsWrapperDirectLinkTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FSEventsWrapperDirectLinkTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE3263620F376190046129C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -135,6 +136,7 @@
 		7B8C3EB020EF736B0001D2B3 = {
 			isa = PBXGroup;
 			children = (
+				7BB5E94C25C33E2400F9B35B /* Readme.adoc */,
 				7B8FE96C25B8D60700B41DAD /* Sources */,
 				7B8FE96E25B8D63700B41DAD /* Tests */,
 				7B8FE96D25B8D62200B41DAD /* Xcode Supporting Files */,
