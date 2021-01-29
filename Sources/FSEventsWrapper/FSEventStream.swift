@@ -93,7 +93,7 @@ public class FSEventStream {
 			}, copyDescription: { ptrToDescribe -> Unmanaged<CFString>? in
 				guard let ptrToDescribe = ptrToDescribe else {return nil}
 				let description = unsafeBitCast(ptrToDescribe, to: FSEventStreamObjCWrapper.self).description as CFString
-				return Unmanaged.passUnretained(description) /* Not sure if correct unmanaged method called here */
+				return Unmanaged.passRetained(description) /* Not sure if correct unmanaged method called here */
 			}
 		)
 		guard let s = FSEventStreamCreate(kCFAllocatorDefault, eventStreamCallback, &context, cfpaths, actualStartId, updateInterval, actualFlags) else {
