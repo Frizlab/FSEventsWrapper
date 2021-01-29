@@ -15,7 +15,7 @@ import Foundation
  * does not… */
 
 guard #available(macOS 10.12, *) else {
-	NSLog("Please run this on a more modern macOS")
+	NSLog("Please run this on a more modern macOS (>= 10.12)")
 	exit(1)
 }
 

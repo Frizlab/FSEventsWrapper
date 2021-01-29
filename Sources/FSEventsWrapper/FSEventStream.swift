@@ -13,7 +13,10 @@ import Foundation
 
 public class FSEventStream {
 	
+	public let callback: (FSEventStream, FSEvent) -> Void
+	
 	internal let eventStream: FSEventStreamRef
+	internal let eventStreamFlags: FSEventStreamCreateFlags
 	
 	public let runLoop: CFRunLoop
 	public let runLoopMode: RunLoop.Mode
@@ -75,6 +78,8 @@ public class FSEventStream {
 		let actualStartId = startId ?? FSEventStreamEventId(kFSEventStreamEventIdSinceNow)
 		let actualFlags = FSEventStreamCreateFlags(kFSEventStreamCreateFlagUseCFTypes | Int(fsEventStreamFlags))
 		
+		self.callback = callback
+		
 		self.runLoopMode = runLoopMode
 		self.runLoop = runLoop.getCFRunLoop()
 		
@@ -100,6 +105,7 @@ public class FSEventStream {
 			return nil
 		}
 		self.eventStream = s
+		self.eventStreamFlags = actualFlags
 		
 		objcWrapper.swiftStream = self
 	}
@@ -145,5 +151,112 @@ private func eventStreamCallback(
 	guard let clientCallBackInfo = clientCallBackInfo, let swiftStream = unsafeBitCast(clientCallBackInfo, to: FSEventStreamObjCWrapper.self).swiftStream else {
 		return
 	}
-	NSLog("%@", "\(swiftStream)")
+	guard let eventPaths = unsafeBitCast(eventPathsAsVoidPtr, to: CFArray.self) as? [String] else {
+		NSLog("***** ERROR: Expected eventPathsAsVoidPtr to be a CFArray of CFStrings, got something I did not recognised.")
+		return
+	}
+	
+//	NSLog("New event loop:");
+	for i in 0..<numEvents {
+		let currentEventPath = eventPaths[i]
+		let currentEventId = eventIds.advanced(by: i).pointee
+		var currentEventFlags = eventFlags.advanced(by: i).pointee
+//		NSLog("   Event id: %llu, Event flags: 0x%x, Event path: %@", currentEventId, currentEventFlags, currentEventPath);
+		
+		let fromUs = (
+			(swiftStream.eventStreamFlags & FSEventStreamCreateFlags(kFSEventStreamCreateFlagMarkSelf)) != 0 ?
+			(currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagOwnEvent)) != 0 :
+			nil
+		)
+		currentEventFlags = (currentEventFlags & ~FSEventStreamEventFlags(kFSEventStreamEventFlagOwnEvent))
+		
+		if currentEventFlags == kFSEventStreamEventFlagNone {
+			swiftStream.callback(swiftStream, .generic(path: currentEventPath, eventId: currentEventId, fromUs: fromUs))
+		} else {
+			let itemType: FSEvent.ItemType
+			let itemTypeFlags = (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagItemIsFile|kFSEventStreamEventFlagItemIsDir|kFSEventStreamEventFlagItemIsSymlink|kFSEventStreamEventFlagItemIsHardlink|kFSEventStreamEventFlagItemIsLastHardlink))
+			switch itemTypeFlags {
+				case FSEventStreamEventFlags(kFSEventStreamEventFlagItemIsFile):         itemType = .file
+				case FSEventStreamEventFlags(kFSEventStreamEventFlagItemIsDir):          itemType = .dir
+				case FSEventStreamEventFlags(kFSEventStreamEventFlagItemIsSymlink):      itemType = .symlink
+				case FSEventStreamEventFlags(kFSEventStreamEventFlagItemIsHardlink):     itemType = .hardlink
+				case FSEventStreamEventFlags(kFSEventStreamEventFlagItemIsLastHardlink): itemType = .lastHardlink
+				default:                                                                 itemType = .unknown
+			}
+			
+			var calledCallbackAtLeastOnce = false
+			if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagMustScanSubDirs)) != 0 {
+				let reason: FSEvent.MustScanSubDirsReason
+				let userDropped   = (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagUserDropped))   != 0
+				let kernelDropped = (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagKernelDropped)) != 0
+				if       userDropped && !kernelDropped {reason = .userDropped}
+				else if !userDropped &&  kernelDropped {reason = .kernelDropped}
+				else                                   {reason = .unknown}
+				swiftStream.callback(swiftStream, .mustScanSubDirs(path: currentEventPath, reason: reason))
+				calledCallbackAtLeastOnce = true
+			}
+			if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagEventIdsWrapped)) != 0 {
+				swiftStream.callback(swiftStream, .eventIdsWrapped)
+				calledCallbackAtLeastOnce = true
+			}
+			if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagHistoryDone)) != 0 {
+				swiftStream.callback(swiftStream, .streamHistoryDone)
+				calledCallbackAtLeastOnce = true
+			}
+			if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagRootChanged)) != 0 {
+				swiftStream.callback(swiftStream, .rootChanged(path: currentEventPath, fromUs: fromUs))
+				calledCallbackAtLeastOnce = true
+			}
+			if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagMount)) != 0 {
+				swiftStream.callback(swiftStream, .volumeMounted(path: currentEventPath, eventId: currentEventId, fromUs: fromUs))
+				calledCallbackAtLeastOnce = true
+			}
+			if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagUnmount)) != 0 {
+				swiftStream.callback(swiftStream, .volumeUnmounted(path: currentEventPath, eventId: currentEventId, fromUs: fromUs))
+				calledCallbackAtLeastOnce = true
+			}
+			if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagItemCreated)) != 0 {
+				swiftStream.callback(swiftStream, .itemCreated(path: currentEventPath, itemType: itemType, eventId: currentEventId, fromUs: fromUs))
+				calledCallbackAtLeastOnce = true
+			}
+			if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagItemRemoved)) != 0 {
+				swiftStream.callback(swiftStream, .itemRemoved(path: currentEventPath, itemType: itemType, eventId: currentEventId, fromUs: fromUs))
+				calledCallbackAtLeastOnce = true
+			}
+			if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagItemInodeMetaMod)) != 0 {
+				swiftStream.callback(swiftStream, .itemInodeMetadataModified(path: currentEventPath, itemType: itemType, eventId: currentEventId, fromUs: fromUs))
+				calledCallbackAtLeastOnce = true
+			}
+			if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagItemRenamed)) != 0 {
+				swiftStream.callback(swiftStream, .itemRenamed(path: currentEventPath, itemType: itemType, eventId: currentEventId, fromUs: fromUs))
+				calledCallbackAtLeastOnce = true
+			}
+			if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagItemModified)) != 0 {
+				swiftStream.callback(swiftStream, .itemDataModified(path: currentEventPath, itemType: itemType, eventId: currentEventId, fromUs: fromUs))
+				calledCallbackAtLeastOnce = true
+			}
+			if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagItemFinderInfoMod)) != 0 {
+				swiftStream.callback(swiftStream, .itemFinderInfoModified(path: currentEventPath, itemType: itemType, eventId: currentEventId, fromUs: fromUs))
+				calledCallbackAtLeastOnce = true
+			}
+			if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagItemChangeOwner)) != 0 {
+				swiftStream.callback(swiftStream, .itemOwnershipModified(path: currentEventPath, itemType: itemType, eventId: currentEventId, fromUs: fromUs))
+				calledCallbackAtLeastOnce = true
+			}
+			if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagItemXattrMod)) != 0 {
+				swiftStream.callback(swiftStream, .itemXattrModified(path: currentEventPath, itemType: itemType, eventId: currentEventId, fromUs: fromUs))
+				calledCallbackAtLeastOnce = true
+			}
+			if #available(macOS 10.13, *) {
+				if (currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagItemCloned)) != 0 {
+					swiftStream.callback(swiftStream, .itemClonedAtPath(path: currentEventPath, itemType: itemType, eventId: currentEventId, fromUs: fromUs))
+					calledCallbackAtLeastOnce = true
+				}
+			}
+			if !calledCallbackAtLeastOnce {
+				NSLog("*** WARNING: Got unknown event %u for path %@", currentEventFlags, currentEventPath)
+				swiftStream.callback(swiftStream, .generic(path: currentEventPath, eventId: currentEventId, fromUs: fromUs))
+			}
+		}
+	}
 }
