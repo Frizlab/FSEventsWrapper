@@ -14,26 +14,22 @@ import Foundation
  * work when the wrapper is linked directly and not from a Framework. Alas, it
  * does not… */
 
-
-class CallbackHandler : NSObject {
-	
-	func fsChanged(inFolder folderPath: String, eventId: FSEventStreamEventId, becauseOfUs isEventFromUs: Bool) {
-		NSLog("%@ - %@", String(isEventFromUs), folderPath)
-	}
-	
+guard #available(macOS 10.12, *) else {
+	NSLog("Please run this on a more modern macOS")
+	exit(1)
 }
 
-
-let callbackHandler = CallbackHandler()
-let w = FSEventStream(path: "/Users/frizlab/Downloads", fsEventStreamFlags: FSEventStreamCreateFlags(kFSEventStreamCreateFlagMarkSelf), callbackHandler: callbackHandler)
+let w = FSEventStream(path: "/Users/frizlab/Downloads", fsEventStreamFlags: FSEventStreamCreateFlags(kFSEventStreamCreateFlagMarkSelf), callback: { stream, event in NSLog("%@", String(describing: event)) })!
 w.startWatching()
 
-Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false){ t in
-	let f = fopen("/Users/frizlab/Downloads/FSEventsWrapperDirectLinkTest.\(Int.random(in: 0..<250)).test", "w+")
+if #available(macOS 10.12, *) {
 	Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false){ t in
-		var i: UInt = 0
-		fwrite(&i, MemoryLayout<UInt>.size, 1, f)
-		fclose(f)
+		let f = fopen("/Users/frizlab/Downloads/FSEventsWrapperDirectLinkTest.\(Int.random(in: 0..<250)).test", "w+")
+		Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false){ t in
+			var i: UInt = 0
+			fwrite(&i, MemoryLayout<UInt>.size, 1, f)
+			fclose(f)
+		}
 	}
 }
 

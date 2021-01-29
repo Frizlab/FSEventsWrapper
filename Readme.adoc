@@ -3,5 +3,8 @@ François Lamboley <fload@me.com>
 
 A wrapper around FSEvents raw C APIs.
 
+== Installation
+Use SPM.
+
 == How to Use?
 TODO

@@ -6,6 +6,7 @@
  * Copyright © 2018 Frizlab. All rights reserved.
  */
 
+import CoreServices
 import Foundation
 
 
