@@ -30,8 +30,8 @@ class FSEventsWrapperTests: XCTestCase {
 	
 	func testBasicMonitoring() {
 		let handler = { (stream: FSEventStream, event: FSEvent) in
+			NSLog("%@", String(describing: event))
 			stream.stopWatching()
-			NSLog("ok")
 		}
 		
 		guard let e = FSEventStream(path: monitoredFolder, callback: handler) else {

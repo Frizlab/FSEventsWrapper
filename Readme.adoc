@@ -7,4 +7,8 @@ A wrapper around FSEvents raw C APIs.
 Use SPM.
 
 == How to Use?
-TODO
+[code,swift]
+----
+let w = FSEventStream(path: "awesome/path", callback: { stream, event in NSLog("%@", String(describing: event)) })
+w?.startWatching()
+----
