@@ -86,20 +86,17 @@ public class FSEventStream {
 		let objcWrapper = FSEventStreamObjCWrapper()
 		var context = FSEventStreamContext(
 			version: 0,
-			info: unsafeBitCast(objcWrapper, to: UnsafeMutableRawPointer.self),
+			info: Unmanaged.passUnretained(objcWrapper).toOpaque(),
 			retain: { ptrToRetain in
 				guard let ptrToRetain = ptrToRetain else {return nil}
-				let u = Unmanaged.passRetained(unsafeBitCast(ptrToRetain, to: FSEventStreamObjCWrapper.self))
+				let u = Unmanaged.passRetained(Unmanaged<FSEventStreamObjCWrapper>.fromOpaque(ptrToRetain).takeUnretainedValue())
 				return unsafeBitCast(u.takeUnretainedValue(), to: UnsafeRawPointer.self)
-			}, release: { ptrToRelease in
+			},
+			release: { ptrToRelease in
 				guard let ptrToRelease = ptrToRelease else {return}
-				let u = Unmanaged.passUnretained(unsafeBitCast(ptrToRelease, to: FSEventStreamObjCWrapper.self))
-				u.release()
-			}, copyDescription: { ptrToDescribe -> Unmanaged<CFString>? in
-				guard let ptrToDescribe = ptrToDescribe else {return nil}
-				let description = unsafeBitCast(ptrToDescribe, to: FSEventStreamObjCWrapper.self).description as CFString
-				return Unmanaged.passRetained(description) /* Not sure if correct unmanaged method called here */
-			}
+				Unmanaged<FSEventStreamObjCWrapper>.fromOpaque(ptrToRelease).release()
+			},
+			copyDescription: nil /* I do not know how to trigger this block, so cannot test, so we set to nil! */
 		)
 		guard let s = FSEventStreamCreate(kCFAllocatorDefault, eventStreamCallback, &context, cfpaths, actualStartId, updateInterval, actualFlags) else {
 			return nil
@@ -113,6 +110,7 @@ public class FSEventStream {
 	deinit {
 		stopWatching()
 		FSEventStreamUnscheduleFromRunLoop(eventStream, runLoop, runLoopMode as CFString)
+		FSEventStreamRelease(eventStream) /* I thought the release would be automatic, it seems it is not. */
 	}
 	
 	public func startWatching() {
@@ -148,7 +146,9 @@ private func eventStreamCallback(
 	eventFlags: UnsafePointer<FSEventStreamEventFlags>,
 	eventIds: UnsafePointer<FSEventStreamEventId>
 ) {
-	guard let clientCallBackInfo = clientCallBackInfo, let swiftStream = unsafeBitCast(clientCallBackInfo, to: FSEventStreamObjCWrapper.self).swiftStream else {
+	guard let clientCallBackInfo = clientCallBackInfo,
+			let swiftStream = Unmanaged<FSEventStreamObjCWrapper>.fromOpaque(clientCallBackInfo).takeUnretainedValue().swiftStream
+	else {
 		return
 	}
 	guard let eventPaths = unsafeBitCast(eventPathsAsVoidPtr, to: CFArray.self) as? [String] else {
