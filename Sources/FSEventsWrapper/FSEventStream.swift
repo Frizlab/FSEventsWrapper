@@ -108,6 +108,7 @@ public class FSEventStream {
 	deinit {
 		stopWatching()
 		FSEventStreamUnscheduleFromRunLoop(eventStream, runLoop, runLoopMode as CFString)
+		FSEventStreamInvalidate(eventStream)
 		FSEventStreamRelease(eventStream) /* I thought the release would be automatic, it seems it is not. */
 	}
 	
