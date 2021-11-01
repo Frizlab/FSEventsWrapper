@@ -1,10 +1,10 @@
 /*
- * FSEventsWrapperTests.swift
- * FSEventsWrapperTests
- *
- * Created by François Lamboley on 06/07/2018.
- * Copyright © 2018 Frizlab. All rights reserved.
- */
+ * FSEventsWrapperTests.swift
+ * FSEventsWrapperTests
+ *
+ * Created by François Lamboley on 06/07/2018.
+ * Copyright © 2018 Frizlab. All rights reserved.
+ */
 
 import XCTest
 @testable import FSEventsWrapper

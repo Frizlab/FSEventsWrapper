@@ -1,10 +1,10 @@
 /*
- * FSEventStream.swift
- * FSEventsWrapper
- *
- * Created by François Lamboley on 10/11/14.
- * Copyright (c) 2014 Frost Land. All rights reserved.
- */
+ * FSEventStream.swift
+ * FSEventsWrapper
+ *
+ * Created by François Lamboley on 10/11/14.
+ * Copyright (c) 2014 Frost Land. All rights reserved.
+ */
 
 import CoreServices
 import Foundation
@@ -34,39 +34,37 @@ public class FSEventStream {
 	}
 	
 	/**
-	- parameter paths: The paths to monitor.
-	
-	- parameter startId:
-		When do we start monitoring the paths from? Allows replaying older events
-		at the given paths.
-		
-		If `nil`, will start from now.
-	
-	- parameter updateInterval:
-		The minimum interval of time between two calls to the callback object.
-		
-		If the given FSEvent flags contains the `kFSEventStreamCreateFlagNoDefer`
-		flag, you'll be called directly when the first event occurs in the folders
-		you watch, then no more than once per the given interval.
-		
-		If the flag is not present, the given delay will occur first, then your
-		handler will be called.
-	
-	- parameter fsEventStreamFlags:
-		The flags to use to create the `FSEvent` stream.
-		
-		**Note**: The `...UseCFTypes` flag will always be added to the flags used
-		to create the stream.
-	
-	- parameter callbackHandler: Your handler object.
-	
-	- parameter runLoop:
-		The run loop on which the stream should be scheduled. If nil, the stream
-		will be scheduled on the **current** run loop.
-	
-	- parameter runLoopMode:
-		The run loop mode on which the stream should be scheduled. If nil, the
-		default run loop mode will be used. */
+	 - parameter paths: The paths to monitor.
+	 
+	 - parameter startId:
+	 When do we start monitoring the paths from?
+	 Allows replaying older events at the given paths.
+	 
+	 If `nil`, will start from now.
+	 
+	 - parameter updateInterval:
+	 The minimum interval of time between two calls to the callback object.
+	 
+	 If the given FSEvent flags contains the `kFSEventStreamCreateFlagNoDefer` flag,
+	 you'll be called directly when the first event occurs in the folders you watch,
+	 then no more than once per the given interval.
+	 
+	 If the flag is not present, the given delay will occur first, then your handler will be called.
+	 
+	 - parameter fsEventStreamFlags:
+	 The flags to use to create the `FSEvent` stream.
+	 
+	  **Note**: The `...UseCFTypes` flag will always be added to the flags used to create the stream.
+	 
+	 - parameter callbackHandler: Your handler object.
+	 
+	 - parameter runLoop:
+	 The run loop on which the stream should be scheduled.
+	 If `nil`, the stream will be scheduled on the **current** run loop.
+	 
+	 - parameter runLoopMode:
+	 The run loop mode on which the stream should be scheduled.
+	 If `nil`, the default run loop mode will be used. */
 	public init?(
 		paths: [String],
 		since startId: FSEventStreamEventId? = nil, updateInterval: CFTimeInterval = 0,
@@ -165,8 +163,8 @@ private func eventStreamCallback(
 		
 		let fromUs = (
 			(swiftStream.eventStreamFlags & FSEventStreamCreateFlags(kFSEventStreamCreateFlagMarkSelf)) != 0 ?
-			(currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagOwnEvent)) != 0 :
-			nil
+				(currentEventFlags & FSEventStreamEventFlags(kFSEventStreamEventFlagOwnEvent)) != 0 :
+				nil
 		)
 		currentEventFlags = (currentEventFlags & ~FSEventStreamEventFlags(kFSEventStreamEventFlagOwnEvent))
 		
