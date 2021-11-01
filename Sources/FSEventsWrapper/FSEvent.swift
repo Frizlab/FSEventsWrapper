@@ -140,8 +140,11 @@ public enum FSEvent {
 	/** `kFSEventStreamEventFlagItemXattrMod` */
 	case itemXattrModified(path: String, itemType: ItemType, eventId: FSEventStreamEventId, fromUs: Bool?)
 	
-	/** `kFSEventStreamEventFlagItemCloned` */
-	@available(macOS 10.13, macCatalyst 11.0, *)
+	/**
+	 `kFSEventStreamEventFlagItemCloned`
+	 
+	 Only available from macOS 10.13 and macCatalyst 11.0, but we cannot use @available on an enum case with associated values. */
+//	@available(macOS 10.13, macCatalyst 11.0, *)
 	case itemClonedAtPath(path: String, itemType: ItemType, eventId: FSEventStreamEventId, fromUs: Bool?)
 	
 }
