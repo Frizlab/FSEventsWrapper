@@ -11,9 +11,9 @@ import Foundation
 
 
 
-public enum FSEvent {
+public enum FSEvent : Sendable {
 	
-	public enum MustScanSubDirsReason {
+	public enum MustScanSubDirsReason : Sendable {
 		
 		case userDropped
 		case kernelDropped
@@ -22,7 +22,7 @@ public enum FSEvent {
 		
 	}
 	
-	public enum ItemType {
+	public enum ItemType : Sendable {
 		
 		case file
 		case dir
