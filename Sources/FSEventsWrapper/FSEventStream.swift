@@ -13,24 +13,24 @@ import Foundation
 
 public class FSEventStream {
 	
-	public let callback: (FSEventStream, FSEvent) -> Void
+	public typealias Callback = @Sendable (FSEventStream, FSEvent) -> Void
+	
+	public let callback: Callback
 	
 	internal let eventStream: FSEventStreamRef
 	internal let eventStreamFlags: FSEventStreamCreateFlags
 	
-	public let runLoop: CFRunLoop
-	public let runLoopMode: RunLoop.Mode
+	public let queue: DispatchQueue
 	
-	private var isScheduled = false
 	private(set) var isStarted = false
 	
 	public convenience init?(
 		path: String,
 		since startId: FSEventStreamEventId? = nil, updateInterval: CFTimeInterval = 0, fsEventStreamFlags flags: FSEventStreamCreateFlags = FSEventStreamCreateFlags(kFSEventStreamCreateFlagNone),
-		runLoop rl: RunLoop = .current, runLoopMode rlm: RunLoop.Mode = .default,
-		callback: @escaping (FSEventStream, FSEvent) -> Void
+		queue: DispatchQueue = .global(),
+		callback: @escaping Callback
 	) {
-		self.init(paths: [path], since: startId, updateInterval: updateInterval, fsEventStreamFlags: flags, runLoop: rl, runLoopMode: rlm, callback: callback)
+		self.init(paths: [path], since: startId, updateInterval: updateInterval, fsEventStreamFlags: flags, queue: queue, callback: callback)
 	}
 	
 	/**
@@ -54,7 +54,7 @@ public class FSEventStream {
 	 - parameter fsEventStreamFlags:
 	 The flags to use to create the `FSEvent` stream.
 	 
-	  **Note**: The `...UseCFTypes` flag will always be added to the flags used to create the stream.
+	 - Note: The `...UseCFTypes` flag will always be added to the flags used to create the stream.
 	 
 	 - parameter callbackHandler: Your handler object.
 	 
@@ -69,8 +69,8 @@ public class FSEventStream {
 		paths: [String],
 		since startId: FSEventStreamEventId? = nil, updateInterval: CFTimeInterval = 0,
 		fsEventStreamFlags: FSEventStreamCreateFlags = FSEventStreamCreateFlags(kFSEventStreamCreateFlagNone),
-		runLoop: RunLoop = .current, runLoopMode: RunLoop.Mode = .default,
-		callback: @escaping (FSEventStream, FSEvent) -> Void
+		queue: DispatchQueue = .global(),
+		callback: @escaping Callback
 	) {
 		let cfpaths: CFArray = paths as CFArray
 		let actualStartId = startId ?? FSEventStreamEventId(kFSEventStreamEventIdSinceNow)
@@ -78,8 +78,7 @@ public class FSEventStream {
 		
 		self.callback = callback
 		
-		self.runLoopMode = runLoopMode
-		self.runLoop = runLoop.getCFRunLoop()
+		self.queue = queue
 		
 		let objcWrapper = FSEventStreamObjCWrapper()
 		var context = FSEventStreamContext(
@@ -102,12 +101,13 @@ public class FSEventStream {
 		self.eventStream = s
 		self.eventStreamFlags = actualFlags
 		
+		FSEventStreamSetDispatchQueue(s, queue)
+		
 		objcWrapper.swiftStream = self
 	}
 	
 	deinit {
 		stopWatching()
-		FSEventStreamUnscheduleFromRunLoop(eventStream, runLoop, runLoopMode as CFString)
 		FSEventStreamInvalidate(eventStream)
 		FSEventStreamRelease(eventStream) /* I thought the release would be automatic, it seems it is not. */
 	}
@@ -115,7 +115,6 @@ public class FSEventStream {
 	public func startWatching() {
 		if isStarted {return}
 		
-		if !isScheduled {FSEventStreamScheduleWithRunLoop(eventStream, runLoop, runLoopMode as CFString); isScheduled = true}
 		FSEventStreamStart(eventStream)
 		isStarted = true
 	}
@@ -258,4 +257,5 @@ private func eventStreamCallback(
 			}
 		}
 	}
+	
 }

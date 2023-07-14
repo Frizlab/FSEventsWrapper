@@ -29,7 +29,7 @@ class FSEventsWrapperTests: XCTestCase {
 	}
 	
 	func testBasicMonitoring() {
-		let handler = { (stream: FSEventStream, event: FSEvent) in
+		let handler: FSEventStream.Callback = { (stream: FSEventStream, event: FSEvent) in
 			NSLog("%@", String(describing: event))
 			stream.stopWatching()
 		}
