@@ -14,7 +14,7 @@ let w = FSEventStream(path: "awesome/path", callback: { stream, event in NSLog("
 w?.startWatching()
 
 /* Or with an AsyncStream. */
-Task {
+Task{
    for await event in FSEventAsyncStream(path: "awesome/path") {
       print(event)
    }
