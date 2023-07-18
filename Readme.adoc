@@ -9,6 +9,14 @@ Use SPM.
 == How to Use?
 [code,swift]
 ----
+/* Using a standard callback. */
 let w = FSEventStream(path: "awesome/path", callback: { stream, event in NSLog("%@", String(describing: event)) })
 w?.startWatching()
+
+/* Or with an AsyncStream. */
+Task {
+   for await event in FSEventAsyncStream(path: "awesome/path") {
+      print(event)
+   }
+}
 ----
