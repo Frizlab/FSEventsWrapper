@@ -48,21 +48,19 @@ public enum FSEvent : Sendable {
 	 `kFSEventStreamEventFlagMustScanSubDirs`, `kFSEventStreamEventFlagUserDropped` &
 	 `kFSEventStreamEventFlagKernelDropped`.
 	 
-	 - note: Not sending the event stream id; it probably has no meaning here. */
+	 - Note: Not sending the event stream id; it probably has no meaning here. */
 	case mustScanSubDirs(path: String, reason: MustScanSubDirsReason)
 	
 	/**
 	 `kFSEventStreamEventFlagEventIdsWrapped`
 	 
-	 The important thing to know is you should retrieve the UUID for the monitored device with `FSEventsCopyUUIDForDevice` if
-	 you plan on saving the event id to replay from the last seen event id when you program relaunch.
+	 The important thing to know is you should retrieve the UUID for the monitored device with `FSEventsCopyUUIDForDevice`
+	  if you plan on saving the event id to replay from the last seen event id when you program relaunch.
 	 When receiving the “event id wrapped” event, you should retrieve the new UUID for the device because it changes when the event id wraps.
-	 [More here](https://stackoverflow.com/a/26281273/1152894).
+	 [More info here](<https://stackoverflow.com/a/26281273>).
 	 
-	 - note: There is no "fromUs" part in this case because I assume FSEvents will
-	 not set the OwnEvent flag for this event (it would not make much sense).
-	 However, I do not have any confirmation from any doc that it is the actual
-	 behaviour.
+	 - Note: There is no "fromUs" part in this case because I assume FSEvents will not set the OwnEvent flag for this event (it would not make much sense).
+	 However, I do not have any confirmation from any doc that it is the actual behaviour.
 	 In any case, the event id counter will probably never wrap (too big to wrap). */
 	case eventIdsWrapped
 	
@@ -79,20 +77,20 @@ public enum FSEvent : Sendable {
 	 
 	 The event id is not sent with this method as it is always 0 (says the doc) for this event.
 	 
-	 - note: I don't know if the “event is from us” flag is set for this event. */
+	 - Note: I don't know if the “event is from us” flag is set for this event. */
 	case rootChanged(path: String, fromUs: Bool?)
 	
 	/**
 	 `kFSEventStreamEventFlagMount`
 	 
-	 - note: I don't know if the “event is from us” flag is set for this event, nor if the event id has any meaning here…
+	 - Note: I don't know if the “event is from us” flag is set for this event, nor if the event id has any meaning here…
 	 I don’t know if there is a valid event id for this event (probably not). */
 	case volumeMounted(path: String, eventId: FSEventStreamEventId, fromUs: Bool?)
 	
 	/**
 	 `kFSEventStreamEventFlagUnmount`
 	 
-	 - note: I don't know if the “event is from us” flag is set for this event, nor if the event id has any meaning here…
+	 - Note: I don't know if the “event is from us” flag is set for this event, nor if the event id has any meaning here…
 	 I don’t know if there is a valid event id for this event (probably not). */
 	case volumeUnmounted(path: String, eventId: FSEventStreamEventId, fromUs: Bool?)
 	
@@ -103,9 +101,12 @@ public enum FSEvent : Sendable {
 	 * The only difference is the events are sent for the parent folder only, and not for each file when the flag is not set.
 	 * ************************************************************************** */
 	
-	/* itemType refers to the kFSEventStreamEventFlagItemIsFile, kFSEventStreamEventFlagItemIsDir,
-	 * kFSEventStreamEventFlagItemIsSymlink, kFSEventStreamEventFlagItemIsHardlink and
-	 * kFSEventStreamEventFlagItemIsLastHardlink flags. */
+	/* itemType refers to the following flags:
+	 *  kFSEventStreamEventFlagItemIsFile
+	 *  kFSEventStreamEventFlagItemIsDir
+	 *  kFSEventStreamEventFlagItemIsSymlink
+	 *  kFSEventStreamEventFlagItemIsHardlink
+	 *  kFSEventStreamEventFlagItemIsLastHardlink */
 	
 	/** `kFSEventStreamEventFlagItemCreated` */
 	case itemCreated(path: String, itemType: ItemType, eventId: FSEventStreamEventId, fromUs: Bool?)
@@ -120,12 +121,14 @@ public enum FSEvent : Sendable {
 	 `kFSEventStreamEventFlagItemRenamed`
 	 
 	 `path` is either the new name or the old name of the file.
-	 You should be called twice, once for the new name, once for the old name
-	 (assuming both names are in the monitored folder or one of their descendants).
+	 
+	 You should be called twice, once for the new name, once for the old name (assuming both names are in the monitored folder or one of their descendants).
 	 There are no sure way (AFAICT) to know which is which.
-	 From my limited testing, both events are sent in the same callback call
-	 (you don’t have the information of the callback call from FSEventsWrapper) at one event interval,
-	 the first one being the original name, the second one the new name. */
+	 
+	 From my limited testing, both events are sent in the same callback call (you don’t have the information of the callback call from FSEventsWrapper) at one event interval,
+	  the first one being the original name, the second one the new name.
+	 
+	 Note you cannot know if two events are from the same callback call using `FSEventsWrapper` for now. */
 	case itemRenamed(path: String, itemType: ItemType, eventId: FSEventStreamEventId, fromUs: Bool?)
 	
 	/** `kFSEventStreamEventFlagItemModified` */

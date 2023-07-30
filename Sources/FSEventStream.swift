@@ -46,8 +46,8 @@ public class FSEventStream {
 	 The minimum interval of time between two calls to the callback object.
 	 
 	 If the given FSEvent flags contains the `kFSEventStreamCreateFlagNoDefer` flag,
-	 you'll be called directly when the first event occurs in the folders you watch,
-	 then no more than once per the given interval.
+	  you'll be called directly when the first event occurs in the folders you watch,
+	  then no more than once per the given interval.
 	 
 	 If the flag is not present, the given delay will occur first, then your handler will be called.
 	 
@@ -58,13 +58,9 @@ public class FSEventStream {
 	 
 	 - parameter callbackHandler: Your handler object.
 	 
-	 - parameter runLoop:
-	 The run loop on which the stream should be scheduled.
-	 If `nil`, the stream will be scheduled on the **current** run loop.
-	 
-	 - parameter runLoopMode:
-	 The run loop mode on which the stream should be scheduled.
-	 If `nil`, the default run loop mode will be used. */
+	 - parameter queue:
+	 The queue on which the stream should be scheduled.
+	 This defaults to the `.global()` queue. */
 	public init?(
 		paths: [String],
 		since startId: FSEventStreamEventId? = nil, updateInterval: CFTimeInterval = 0,
