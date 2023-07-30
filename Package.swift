@@ -9,7 +9,7 @@ let package = Package(
 		.library(name: "FSEventsWrapper", targets: ["FSEventsWrapper"]),
 	],
 	targets: [
-		.target(name: "FSEventsWrapper", dependencies: []),
-		.testTarget(name: "FSEventsWrapperTests", dependencies: ["FSEventsWrapper"])
+		.target(name: "FSEventsWrapper", path: "Sources"),
+		.testTarget(name: "FSEventsWrapperTests", dependencies: ["FSEventsWrapper"], path: "Tests")
 	]
 )
