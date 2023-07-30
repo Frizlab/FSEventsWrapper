@@ -2,8 +2,8 @@
  * FSEventsWrapperTests.swift
  * FSEventsWrapperTests
  *
- * Created by François Lamboley on 06/07/2018.
- * Copyright © 2018 Frizlab. All rights reserved.
+ * Created by François Lamboley on 2018/07/06.
+ * Copyright © 2018 François Lamboley.
  */
 
 import XCTest
@@ -11,7 +11,7 @@ import XCTest
 
 
 
-class FSEventsWrapperTests: XCTestCase {
+class FSEventsWrapperTests : XCTestCase {
 	
 	var monitoredFolder: String!
 	

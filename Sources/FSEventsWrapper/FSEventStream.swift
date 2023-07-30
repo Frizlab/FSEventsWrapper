@@ -2,8 +2,8 @@
  * FSEventStream.swift
  * FSEventsWrapper
  *
- * Created by François Lamboley on 10/11/14.
- * Copyright (c) 2014 Frost Land. All rights reserved.
+ * Created by François Lamboley on 2014/11/10.
+ * Copyright © 2014 François Lamboley.
  */
 
 import CoreServices

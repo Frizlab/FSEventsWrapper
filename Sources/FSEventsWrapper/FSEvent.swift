@@ -2,8 +2,8 @@
  * FSEvent.swift
  * FSEventsWrapper
  *
- * Created by François Lamboley on 09/07/2018.
- * Copyright © 2018 Frizlab. All rights reserved.
+ * Created by François Lamboley on 2018/07/09.
+ * Copyright © 2018 François Lamboley.
  */
 
 import CoreServices
