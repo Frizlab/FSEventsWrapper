@@ -41,8 +41,8 @@ class FSEventsWrapperTests : XCTestCase {
 		
 		e.startWatching()
 		
-		DispatchQueue(label: "testBasicMonitoring").asyncAfter(deadline: .now() + .milliseconds(500)){
-			FileManager.default.createFile(atPath: (self.monitoredFolder as NSString).appendingPathComponent("testBasicMonitoring"), contents: nil, attributes: nil)
+		DispatchQueue(label: "testBasicMonitoring").asyncAfter(deadline: .now() + .milliseconds(500)){ [monitoredFolder = monitoredFolder!] in
+			FileManager.default.createFile(atPath: (monitoredFolder as NSString).appendingPathComponent("testBasicMonitoring"), contents: nil, attributes: nil)
 		}
 		
 		let startDate = Date()
